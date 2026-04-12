@@ -1,0 +1,3 @@
+[submodule "zig-bbq-cookbook"]
+	path = zig-bbq-cookbook
+	url = https://github.com/maddythewisp/zig-bbq-cookbook.git

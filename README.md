@@ -4,7 +4,13 @@ Comprehensive Zig 0.16.0 programming skill for AI coding agents, including async
 
 ## Installation
 
-Copy or symlink the `zig-programming` directory into your agent's skills directory:
+Run the install script to symlink into all detected agents (Claude Code, Codex):
+
+```bash
+./install.sh
+```
+
+Or install manually:
 
 ```bash
 # Claude Code
@@ -12,13 +18,6 @@ ln -s /path/to/zig-programming ~/.claude/skills/zig-programming
 
 # Codex
 ln -s /path/to/zig-programming ~/.codex/skills/zig-programming
-```
-
-Or copy instead of symlink:
-
-```bash
-cp -r zig-programming ~/.claude/skills/zig-programming
-cp -r zig-programming ~/.codex/skills/zig-programming
 ```
 
 Restart the agent after installation.
