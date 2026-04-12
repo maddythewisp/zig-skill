@@ -1,40 +1,32 @@
-# Zig Programming Skill for Claude Code
+# Zig Programming Skill
 
-Comprehensive Zig 0.16.0 programming expertise for Claude Code, including async I/O, 223 tested recipes, reference documentation, templates, and examples.
+Comprehensive Zig 0.16.0 programming skill for AI coding agents, including async I/O, 223 tested recipes, reference documentation, templates, and examples.
 
 ## Installation
 
-Symlink or copy this directory into your Claude Code skills directory:
+Symlink or copy this directory into your agent's skills directory:
 
 ```bash
-# Symlink (recommended - updates with git pull)
+# Claude Code
 ln -s "$(pwd)" ~/.claude/skills/zig-programming
 
-# Or copy
-cp -r . ~/.claude/skills/zig-programming
+# Codex
+ln -s "$(pwd)" ~/.codex/skills/zig-programming
 ```
 
-Restart Claude Code after installation.
+Restart the agent after installation.
 
 ## Structure
 
 ```
 zig-programming/
-├── SKILL.md                 # Main skill instructions (Claude reads this)
-├── references/              # Zig 0.16.0 documentation by topic
-│   ├── core-language.md
-│   ├── control-flow.md
-│   ├── functions-errors.md
-│   ├── memory-management.md
-│   ├── comptime.md
-│   ├── async-overview.md
-│   ├── async-vs-concurrent.md
-│   └── ...                  # 22 files total
+├── SKILL.md                 # Main skill instructions (agent reads this)
+├── references/              # Zig 0.16.0 documentation by topic (22 files)
 ├── recipes/                 # 223 tested code recipes
 ├── examples/                # 9 complete working programs
 ├── assets/templates/        # 7 code templates
-└── build/                   # Build tools (not distributed)
-    └── consolidator.py
+└── tools/
+    └── consolidator.py      # Doc consolidation tool
 ```
 
 ## Updating References

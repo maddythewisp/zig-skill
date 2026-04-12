@@ -1,25 +1,36 @@
-# Zig Skill for Claude Code
+# Zig Programming Skill
 
-Comprehensive Zig 0.16.0 programming skill for Claude Code, including async I/O patterns, 223 tested recipes, reference documentation, templates, and examples.
+Comprehensive Zig 0.16.0 programming skill for AI coding agents, including async I/O patterns, 223 tested recipes, reference documentation, templates, and examples.
 
 ## Installation
 
-Copy or symlink the `zig-programming` directory into your Claude Code skills directory:
+Copy or symlink the `zig-programming` directory into your agent's skills directory:
 
 ```bash
-# Option A: Symlink (updates automatically with git pull)
-ln -s /path/to/claude-zig-skill/zig-programming ~/.claude/skills/zig-programming
+# Claude Code
+ln -s /path/to/zig-programming ~/.claude/skills/zig-programming
 
-# Option B: Copy
-cp -r zig-programming ~/.claude/skills/zig-programming
+# Codex
+ln -s /path/to/zig-programming ~/.codex/skills/zig-programming
 ```
 
-Restart Claude Code after installation.
+Or copy instead of symlink:
+
+```bash
+cp -r zig-programming ~/.claude/skills/zig-programming
+cp -r zig-programming ~/.codex/skills/zig-programming
+```
+
+Restart the agent after installation.
 
 ### Verify Installation
 
 ```bash
+# Claude Code
 ls ~/.claude/skills/zig-programming/SKILL.md
+
+# Codex
+ls ~/.codex/skills/zig-programming/SKILL.md
 ```
 
 ## What's Included
@@ -49,28 +60,26 @@ Fundamentals, data structures, strings, memory/allocators, comptime, structs, fu
 The skill activates automatically when working with Zig code:
 
 ```
-You: "How do I iterate with an index in Zig?"
-Claude: [Provides for loop syntax with examples]
+"How do I iterate with an index in Zig?"
+→ Provides for loop syntax with examples
 
-You: "Show me how to use ArenaAllocator"
-Claude: [Loads relevant recipe with tested code]
+"Show me how to use ArenaAllocator"
+→ Loads relevant recipe with tested code
 
-You: "How does async I/O work in Zig 0.16?"
-Claude: [Loads async-overview.md and shows io.async() patterns]
+"How does async I/O work in Zig 0.16?"
+→ Loads async-overview.md and shows io.async() patterns
 ```
 
 ## Repository Structure
 
 ```
-claude-zig-skill/
-├── README.md                    # This file
-├── zig-programming/             # The skill (install this directory)
-│   ├── SKILL.md                 # Main skill instructions
-│   ├── references/              # Zig 0.16.0 documentation
-│   ├── recipes/                 # 223 BBQ Cookbook recipes
-│   ├── examples/                # Complete working programs
-│   └── assets/templates/        # Code templates
-└── converter/                   # Zig HTML docs converter tool
+zig-programming/             # The skill (install this directory)
+├── SKILL.md                 # Main skill instructions
+├── references/              # Zig 0.16.0 documentation
+├── recipes/                 # 223 BBQ Cookbook recipes
+├── examples/                # Complete working programs
+└── assets/templates/        # Code templates
+converter/                   # Zig HTML docs converter tool
 ```
 
 ## Updating References
@@ -89,7 +98,6 @@ python zig-programming/tools/consolidator.py converter/docs-master zig-programmi
 
 - **BBQ Cookbook**: [github.com/whit3rabbit/zig-bbq-cookbook](https://github.com/whit3rabbit/zig-bbq-cookbook)
 - **Official Zig Docs**: [ziglang.org/documentation](https://ziglang.org/documentation/)
-- **Claude Code Skills**: [docs.claude.com/en/docs/claude-code/skills](https://docs.claude.com/en/docs/claude-code/skills)
 
 ## License
 
