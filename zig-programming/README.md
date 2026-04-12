@@ -44,5 +44,5 @@ To regenerate reference docs from the official Zig documentation:
 ```bash
 # From repo root:
 python converter/zig_docs_converter.py --version master --output converter/docs-master
-python zig-programming/build/consolidator.py converter/docs-master zig-programming/references
+python zig-programming/tools/consolidator.py converter/docs-master zig-programming/references
 ```

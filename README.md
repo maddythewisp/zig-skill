@@ -82,7 +82,7 @@ To regenerate reference docs from the official Zig documentation:
 python converter/zig_docs_converter.py --version master --output converter/docs-master
 
 # Consolidate into themed reference files
-python zig-programming/build/consolidator.py converter/docs-master zig-programming/references
+python zig-programming/tools/consolidator.py converter/docs-master zig-programming/references
 ```
 
 ## Links
