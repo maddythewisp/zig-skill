@@ -1,6 +1,6 @@
 # Build System & Modules Recipes
 
-*18 tested recipes for Zig 0.15.2*
+*18 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -587,7 +587,7 @@ Solutions:
 
 ```zig
 // Recipe 10.1: Making a Hierarchical Package of Modules
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to organize code into a hierarchical
 // module structure with multiple levels of imports and re-exports.
@@ -1488,7 +1488,7 @@ pub fn process(data: []const u8) !void { ... }
 
 ```zig
 // Recipe 10.2: Controlling the Export of Symbols
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to control symbol visibility using the pub keyword,
 // creating clean public APIs while hiding implementation details.
@@ -2552,7 +2552,7 @@ Relative paths always resolve from the current file's location.
 
 ```zig
 // Recipe 10.3: Importing Package Submodules Using Relative Names
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to import submodules using relative paths,
 // showing parent-to-child, child-to-parent, and sibling imports.
@@ -3591,7 +3591,7 @@ Users' code doesn't change - they still import `user.zig`.
 
 ```zig
 // Recipe 10.4: Splitting a Module into Multiple Files
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to split a large module into multiple files
 // while maintaining a clean public API through an aggregator module.
@@ -4733,7 +4733,7 @@ Each step is independent and testable.
 
 ```zig
 // Recipe 10.5: Making Separate Directories of Code Import Under a Common Namespace
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to organize separate feature directories
 // under a common namespace using a namespace aggregator module.
@@ -5767,7 +5767,7 @@ Key takeaways for module "reloading" in Zig:
 
 ```zig
 // Recipe 10.6: Reloading Modules
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates module import caching, state management,
 // and patterns for dynamic code updates in Zig.
@@ -6885,7 +6885,7 @@ Both approaches work, but Zig's compiled model offers better performance and sim
 
 ```zig
 // Recipe 10.7: Making a Directory or Zip File Runnable as a Main Script
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates Zig's approach to creating executable packages.
 // Unlike Python's __main__.py pattern, Zig uses build.zig to define entry points.
@@ -7630,7 +7630,7 @@ This information can be populated by build.zig using the options system.
 
 ```zig
 // Recipe 10.8: Reading Datafiles Within a Package
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to access data files packaged with your code.
 // Unlike Python's importlib.resources or pkg_resources, Zig provides compile-time
@@ -8514,7 +8514,7 @@ if (!validator.canImport("main", "vendor")) {
 
 ```zig
 // Recipe 10.9: Adding Directories to the Build Path
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to organize code across multiple directories
 // and configure the build system to find modules in different locations.
@@ -9578,7 +9578,7 @@ const mod = ModuleAlias.resolve("primary");
 
 ```zig
 // Recipe 10.10: Importing Modules Using a Name Given in a String
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates working with dynamic module selection in Zig.
 // Unlike Python's importlib, Zig's @import requires compile-time known strings.
@@ -10522,7 +10522,7 @@ pub const module_docs = Documentation{
 
 ```zig
 // Recipe 10.11: Distributing Packages
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to prepare and distribute Zig packages.
 // Unlike Python's setup.py and PyPI, Zig uses build.zig.zon and Git-based packages.

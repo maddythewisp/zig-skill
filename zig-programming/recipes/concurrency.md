@@ -1,6 +1,6 @@
 # Concurrency & Threading Recipes
 
-*8 tested recipes for Zig 0.15.2*
+*8 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 

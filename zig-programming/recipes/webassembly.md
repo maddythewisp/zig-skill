@@ -1,6 +1,6 @@
 # WebAssembly Recipes
 
-*6 tested recipes for Zig 0.15.2*
+*6 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 

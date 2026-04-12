@@ -4,12 +4,12 @@ description: >
   Provides comprehensive Zig programming language expertise including syntax, standard library,
   build system, memory management, error handling, and C interoperability. Use this skill when
   working with Zig code, learning Zig concepts, debugging compilation errors, or building
-  Zig applications across multiple versions (0.2.0 through master).
+  Zig applications across multiple versions (0.2.0 through 0.16.0).
 ---
 
 # Zig Programming Language Skill
 
-This skill provides expertise in Zig, a general-purpose programming language focused on robustness, optimality, and maintainability. The skill includes version-specific documentation (0.2.0 through master), automatic version detection, code templates, and comprehensive reference materials organized for progressive disclosure.
+This skill provides expertise in Zig, a general-purpose programming language focused on robustness, optimality, and maintainability. The skill includes version-specific documentation (0.2.0 through 0.16.0), automatic version detection, code templates, and comprehensive reference materials organized for progressive disclosure.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ This skill provides expertise in Zig, a general-purpose programming language foc
 
 ### References - Progressive Loading Guide
 
-**Important:** References are version-specific. Use `scripts/get_references.py` to get the correct reference path for the detected Zig version, or load from `references/latest/` (symlink to current stable: 0.15.2).
+**Important:** References are version-specific. Use `scripts/get_references.py` to get the correct reference path for the detected Zig version, or load from `references/latest/` (symlink to current stable: 0.16.0).
 
 Load documentation progressively based on task complexity. Use this decision tree:
 
@@ -57,11 +57,11 @@ Load documentation progressively based on task complexity. Use this decision tre
 ```bash
 # Get reference path for detected version
 python scripts/get_references.py
-# Output: references/v0.15.2
+# Output: references/v0.16.0
 
 # With specific version
 python scripts/get_references.py --version 0.13.0
-# Output: references/v0.15.2 (with fallback warning)
+# Output: references/v0.16.0 (with fallback warning)
 
 # JSON output for programmatic use
 python scripts/get_references.py --json
@@ -69,7 +69,7 @@ python scripts/get_references.py --json
 
 ### Recipes - Cookbook
 
-The skill includes **223 tested recipes** from the Zig BBQ Cookbook, organized by topic. All recipes include complete, compilable code verified against Zig 0.15.2.
+The skill includes **223 tested recipes** from the Zig BBQ Cookbook, organized by topic. All recipes include complete, compilable code verified against Zig 0.16.0.
 
 **Finding recipes by topic:**
 - `recipes/fundamentals.md` - Philosophy, basics (19 recipes)
@@ -166,7 +166,7 @@ See `scripts/README.md` for complete script documentation.
 ### Writing New Code
 
 1. **Start from template** - Copy appropriate template from `assets/templates/`
-2. **Check version** - Default to Zig 0.15.2 unless specified
+2. **Check version** - Default to Zig 0.16.0 unless specified
 3. **Handle errors explicitly** - Use `try`, `catch`, or `errdefer`
 4. **Pass allocators** - Never use global state, pass allocators as parameters
 5. **Add tests immediately** - Write `test` blocks alongside implementation
@@ -191,7 +191,7 @@ To teach Zig concepts effectively:
 
 ## Version Awareness
 
-**Default to Zig 0.15.2** unless user specifies otherwise or detection determines a different version.
+**Default to Zig 0.16.0** unless user specifies otherwise or detection determines a different version.
 
 ### Version Detection Workflow
 
@@ -212,7 +212,7 @@ This script:
 - Attempts `zig version` command (most reliable)
 - Scans `build.zig` and `.zig` files for version markers
 - Returns reference path and version info with confidence level
-- Handles fallbacks automatically (e.g., 0.14.1 → use 0.15.2 refs)
+- Handles fallbacks automatically (e.g., 0.14.1 → use 0.16.0 refs)
 
 **3. Manual detection (if automated fails):**
 - Scan `build.zig` for API patterns:
@@ -222,29 +222,29 @@ This script:
   - `b.addExecutable("name", "file")` → pre-0.11
 - Check `.zig` files for syntax markers:
   - `for (items, 0..) |item, i|` → 0.13+
-  - `async`/`await` keywords → 0.9-0.10 (removed in 0.11)
+  - `async`/`await` keywords → 0.9-0.10 (removed in 0.11, reintroduced in 0.16+)
 - Load `references/version-differences.md` for full detection markers
 
 **4. Ask user if ambiguous:**
 - "I detected you might be using Zig 0.13+ based on your build.zig. Can you confirm your version?"
-- Offer common versions: 0.15.2 (stable), 0.14.1, 0.13.0, master (development)
+- Offer common versions: 0.16.0 (stable), 0.14.1, 0.13.0, master (development)
 
-**5. Default to 0.15.2:**
+**5. Default to 0.16.0:**
 - Use current stable if no detection succeeds
-- Inform user: "Assuming Zig 0.15.2. Let me know if you're using a different version."
+- Inform user: "Assuming Zig 0.16.0. Let me know if you're using a different version."
 
 ### Loading Version-Specific References
 
 **After detecting version:**
 1. Use `scripts/get_references.py` to determine correct reference path
-2. Load references from that version directory (e.g., `references/v0.15.2/`)
+2. Load references from that version directory (e.g., `references/v0.16.0/`)
 3. Always load `references/version-differences.md` (shared file) for migration guidance
 
 **Example workflow:**
 ```bash
 # Detect version and get reference path
 REF_PATH=$(python scripts/get_references.py)
-# REF_PATH is now "references/v0.15.2" or "references/latest"
+# REF_PATH is now "references/v0.16.0" or "references/latest"
 
 # Load version-specific documentation
 cat $REF_PATH/core-language.md
@@ -255,7 +255,7 @@ cat references/version-differences.md
 ```
 
 **Handling fallbacks:**
-- If exact version not available (e.g., 0.14.1), script returns closest match (0.15.2) with warning
+- If exact version not available (e.g., 0.14.1), script returns closest match (0.16.0) with warning
 - Warnings indicate major differences (e.g., "for loop syntax differs from 0.13+")
 - Always check fallback warnings to understand version compatibility
 
@@ -263,13 +263,14 @@ cat references/version-differences.md
 
 Be aware of these major version differences when writing code:
 
+- **0.16+**: Async/await reintroduced with new `std.Io` interface and `async`/`await` keywords
 - **0.11+**: Async/await removed, new build.zig API (`std.Build`, `b.path()`)
 - **0.13+**: Modern for loop syntax (`for (items, 0..) |item, i|`)
 - **0.12-**: Different for loop syntax (manual index variables)
 - **Pre-0.11**: Legacy build API (`std.build.Builder`), different error sets
 
 **See `references/version-differences.md` for:**
-- Detailed migration guides (0.10→0.11, 0.12→0.13, 0.13→0.15)
+- Detailed migration guides (0.10→0.11, 0.12→0.13, 0.13→0.15, 0.15→0.16)
 - Error message translations
 - Before/after code examples
 - Breaking changes catalog
@@ -287,7 +288,7 @@ Be aware of these major version differences when writing code:
 **Best practice for cross-version code:**
 - Prefer feature detection over version checks: `@hasDecl(std, "Build")` instead of `if (version >= 0.11)`
 - See `references/latest/patterns-integration.md` for `@hasDecl`/`@hasField` examples
-- Document target version in code comments: `// Target Zig Version: 0.15.2`
+- Document target version in code comments: `// Target Zig Version: 0.16.0`
 - For cross-version templates, see `assets/templates/cross-version/`
 
 ## Best Practices

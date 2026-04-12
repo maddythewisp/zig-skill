@@ -1,6 +1,6 @@
 # Comptime & Metaprogramming Recipes
 
-*24 tested recipes for Zig 0.15.2*
+*24 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -700,7 +700,7 @@ Zig's approach is simpler and more explicit.
 
 ```zig
 // Recipe 9.1: Putting a Wrapper Around a Function
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -1739,7 +1739,7 @@ test "error propagation" {
 
 ```zig
 // Recipe 9.2: Preserving Function Metadata When Writing Decorators
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -2890,7 +2890,7 @@ test "metadata survives unwrapping" {
 
 ```zig
 // Recipe 9.3: Unwrapping a Decorator
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -4042,7 +4042,7 @@ if (threshold < 0 or threshold > 100) {
 
 ```zig
 // Recipe 9.4: Defining a Decorator That Takes Arguments
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -5187,7 +5187,7 @@ fn isNumeric(comptime T: type) bool {
 
 ```zig
 // Recipe 9.5: Enforcing Type Checking on a Function Using a Decorator
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -6479,7 +6479,7 @@ const Resource = struct {
 
 ```zig
 // Recipe 9.6: Defining Decorators as Part of a Struct
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -7923,7 +7923,7 @@ pub fn deinit(self: *Self) void
 
 ```zig
 // Recipe 9.7: Defining Decorators as Structs
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -9296,7 +9296,7 @@ test "validation edge cases" {
 
 ```zig
 // Recipe 9.8: Applying Decorators to Struct and Static Methods
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -10576,7 +10576,7 @@ Can't make variadic functions:
 
 ```zig
 // Recipe 9.9: Writing Decorators That Add Arguments to Wrapped Functions
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -11543,7 +11543,7 @@ Each wrapper adds another level of indirection. For complex compositions, consid
 
 ```zig
 // Recipe 9.10: Using Decorators to Patch Struct Definitions
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -12661,7 +12661,7 @@ The key advantage is that all decisions happen during compilation, resulting in 
 
 ```zig
 // Recipe 9.11: Using Comptime to Control Instance Creation
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -13743,7 +13743,7 @@ This makes field order analysis essentially free in production code.
 
 ```zig
 // Recipe 9.12: Capturing Struct Attribute Definition Order
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -14828,7 +14828,7 @@ The pattern trades a small amount of syntax for significant gains in maintainabi
 
 ```zig
 // Recipe 9.13: Defining a Generic That Takes Optional Arguments
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -15947,7 +15947,7 @@ These patterns are useful for:
 
 ```zig
 // Recipe 9.14: Enforcing an Argument Signature on Tuple Arguments
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Performance Note: All validation in this recipe happens at compile-time.
 // There is ZERO runtime cost for these checks. Invalid code will not compile,
@@ -17083,7 +17083,7 @@ The `@typeInfo` builtin provides complete type metadata at compile time.
 
 ```zig
 // Recipe 9.15: Enforcing Coding Conventions in Structs
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to use compile-time validation to enforce
 // naming conventions, field requirements, and structural patterns in structs.
@@ -18162,7 +18162,7 @@ This helps understand what the compiler generated.
 
 ```zig
 // Recipe 9.16: Defining Structs Programmatically
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to create struct types at compile time using @Type.
 // All struct generation happens during compilation with zero runtime overhead.
@@ -19174,7 +19174,7 @@ Each pattern complements the others for different use cases.
 
 ```zig
 // Recipe 9.17: Initializing Struct Members at Definition Time
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates compile-time struct initialization patterns,
 // default values, and automatic field population.
@@ -24827,7 +24827,7 @@ Capture build-time information:
 /// Embed build-time metadata
 const build_info = struct {
     const timestamp = "2025-01-20T12:00:00Z"; // Would come from build system
-    const compiler = "zig 0.15.2";
+    const compiler = "zig 0.16.0";
     const target = "x86_64-linux";
 
     pub fn summary() []const u8 {
@@ -25330,7 +25330,7 @@ test "compile-time compression" {
 /// Embed build-time metadata
 const build_info = struct {
     const timestamp = "2025-01-20T12:00:00Z"; // Would come from build system
-    const compiler = "zig 0.15.2";
+    const compiler = "zig 0.16.0";
     const target = "x86_64-linux";
 
     pub fn summary() []const u8 {

@@ -3,7 +3,7 @@
 // This build.zig works across multiple Zig versions (0.11+) by detecting
 // features at compile time rather than checking version numbers.
 //
-// Supported Versions: Zig 0.11.0 through 0.15.2+
+// Supported Versions: Zig 0.11.0 through 0.16.0+
 // Not Supported: Zig 0.10.x and earlier (completely different build API)
 //
 // Key Features:
@@ -195,7 +195,7 @@ pub fn build(b: *std.Build) void {
 //   # Test with specific version
 //   zig-0.11.0 build
 //   zig-0.13.0 build
-//   zig-0.15.2 build
+//   zig-0.16.0 build
 //
 // Common issues:
 //

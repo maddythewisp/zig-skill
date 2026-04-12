@@ -1,6 +1,6 @@
 # Functions & Callbacks Recipes
 
-*11 tested recipes for Zig 0.15.2*
+*11 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 

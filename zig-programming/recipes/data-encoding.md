@@ -1,6 +1,6 @@
 # Data Encoding (CSV, JSON, XML) Recipes
 
-*9 tested recipes for Zig 0.15.2*
+*9 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -6307,7 +6307,7 @@ test "database operations" {
 
 ```zig
 // Recipe 6.6: Interacting with a Relational Database (SQLite)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates two approaches to SQLite database interaction:
 // 1. Beginner: Using a simple wrapper library (zqlite.zig)

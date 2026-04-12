@@ -678,7 +678,7 @@ AVAILABLE_VERSIONS = [
     '0.2.0', '0.3.0', '0.6.0', '0.7.1', '0.8.1',
     # Modern versions (current HTML structure)
     '0.9.1', '0.10.1', '0.11.0', '0.12.1',
-    '0.13.0', '0.14.1', '0.15.2', 'master'
+    '0.13.0', '0.14.1', '0.15.2', '0.16.0', 'master'
 ]
 
 ZIG_DOCS_BASE_URL = 'https://ziglang.org/documentation/'
@@ -696,7 +696,7 @@ Examples:
   python {sys.argv[0]}
 
   # Download specific version
-  python {sys.argv[0]} --version 0.15.2
+  python {sys.argv[0]} --version 0.16.0
 
   # Download all versions (13 versions: 0.2.0-0.3.0, 0.6.0-0.8.1, 0.9.1-master)
   python {sys.argv[0]} --all

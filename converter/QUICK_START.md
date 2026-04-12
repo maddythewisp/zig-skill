@@ -34,10 +34,10 @@ Output: `../docs-master/` with 51 markdown files
 
 ```bash
 cd converter
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 ```
 
-Output: `../docs-0.15.2/` with 51 markdown files
+Output: `../docs-0.16.0/` with 51 markdown files
 
 ### Get All Versions (Creates 16 Directories)
 
@@ -50,7 +50,7 @@ Output:
 - `../docs-0.1.1/`
 - `../docs-0.2.0/`
 - ...
-- `../docs-0.15.2/`
+- `../docs-0.16.0/`
 - `../docs-master/`
 
 **Note:** This will download ~16MB of documentation and may take several minutes.
@@ -69,7 +69,7 @@ Output: `../docs/` directory
 Each version directory contains:
 
 ```
-docs-0.15.2/
+docs-0.16.0/
 ├── README.md                      # Navigation with version info
 ├── 01-introduction.md             # ~1KB
 ├── 02-zig-standard-library.md     # ~0.5KB
@@ -89,14 +89,14 @@ docs-0.15.2/
 ## Directory Structure After Running
 
 ```bash
-# After: cd converter && python zig_docs_converter.py --version 0.15.2
+# After: cd converter && python zig_docs_converter.py --version 0.16.0
 zig-docs/
 ├── converter/
 │   ├── venv/             # Python virtual environment
 │   ├── zig_docs_converter.py
 │   ├── requirements.txt
 │   └── ...
-├── docs-0.15.2/          # ← 51 markdown files
+├── docs-0.16.0/          # ← 51 markdown files
 └── README files...
 
 # After: cd converter && python zig_docs_converter.py --all
@@ -107,7 +107,7 @@ zig-docs/
 ├── docs-0.1.1/           # ← 51 markdown files
 ├── docs-0.2.0/           # ← 51 markdown files
 ├── ...
-├── docs-0.15.2/          # ← 51 markdown files
+├── docs-0.16.0/          # ← 51 markdown files
 ├── docs-master/          # ← 51 markdown files
 └── ...
 ```
@@ -117,7 +117,7 @@ zig-docs/
 | Version | Release Date | Notes |
 |---------|--------------|-------|
 | master  | Rolling | Latest development version |
-| 0.15.2  | 2025 | Latest stable |
+| 0.16.0  | 2025 | Latest stable |
 | 0.14.1  | 2024 | |
 | 0.13.0  | 2024 | |
 | 0.12.1  | 2024 | |
@@ -173,15 +173,15 @@ To create a Claude skill from the output:
 1. Download the version you want:
    ```bash
    cd converter
-   python zig_docs_converter.py --version 0.15.2
+   python zig_docs_converter.py --version 0.16.0
    ```
 
-2. The `../docs-0.15.2/` directory is ready to use:
+2. The `../docs-0.16.0/` directory is ready to use:
    - Each `.md` file is a separate context source
    - `README.md` provides navigation
    - Cross-references are preserved
 
-3. Point your Claude skill to the `../docs-0.15.2/` directory
+3. Point your Claude skill to the `../docs-0.16.0/` directory
 
 ## Advanced Usage
 
@@ -189,7 +189,7 @@ To create a Claude skill from the output:
 
 ```bash
 cd converter
-python zig_docs_converter.py --version 0.15.2 --output ../my-zig-docs
+python zig_docs_converter.py --version 0.16.0 --output ../my-zig-docs
 ```
 
 ### Multiple Versions for Comparison
@@ -198,13 +198,13 @@ python zig_docs_converter.py --version 0.15.2 --output ../my-zig-docs
 # Get two versions to compare
 cd converter
 python zig_docs_converter.py --version 0.14.1
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 
 # Now you can diff them
 cd ..
-diff docs-0.14.1/03-hello-world.md docs-0.15.2/03-hello-world.md
+diff docs-0.14.1/03-hello-world.md docs-0.16.0/03-hello-world.md
 # Or use compare script
-converter/compare_versions.sh 0.14.1 0.15.2 03-hello-world.md
+converter/compare_versions.sh 0.14.1 0.16.0 03-hello-world.md
 ```
 
 ### Custom URL (Beta/Nightly Builds)
@@ -224,5 +224,5 @@ python zig_docs_converter.py --url https://ziglang.org/documentation/master/
 
 - See [converter/USAGE.md](converter/USAGE.md) for detailed converter options
 - Check [README.md](README.md) for full documentation
-- View example output in `docs-test/`, `docs-master/`, or `docs-0.15.2/`
+- View example output in `docs-test/`, `docs-master/`, or `docs-0.16.0/`
 - Explore [zig-programming/README.md](zig-programming/README.md) for the Zig programming skill

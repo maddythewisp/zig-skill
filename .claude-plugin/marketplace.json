@@ -9,7 +9,7 @@
     {
       "name": "zig-programming",
       "source": "./zig-programming",
-      "description": "Comprehensive Zig programming expertise with 223 recipes, multi-version docs (0.2.0-0.15.2+), templates, and examples"
+      "description": "Comprehensive Zig programming expertise with 223 recipes, multi-version docs (0.2.0-0.16.0), templates, and examples"
     },
     {
       "name": "zig-async",

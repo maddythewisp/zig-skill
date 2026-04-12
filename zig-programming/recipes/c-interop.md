@@ -1,6 +1,6 @@
 # C Interoperability Recipes
 
-*7 tested recipes for Zig 0.15.2*
+*7 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 

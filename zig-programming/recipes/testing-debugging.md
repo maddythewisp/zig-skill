@@ -1,6 +1,6 @@
 # Testing & Debugging Recipes
 
-*14 tested recipes for Zig 0.15.2*
+*14 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -267,7 +267,7 @@ test "verify ANSI color codes in output" {
 
 ### Common Gotchas
 
-**Forgetting the allocator**: In Zig 0.15.2, `ArrayList` is unmanaged and requires passing the allocator to `deinit` and `writer`:
+**Forgetting the allocator**: In Zig 0.16.0, `ArrayList` is unmanaged and requires passing the allocator to `deinit` and `writer`:
 
 ```zig
 var buffer = std.ArrayList(u8){};

@@ -1,6 +1,6 @@
 # Data Structures Recipes
 
-*20 tested recipes for Zig 0.15.2*
+*20 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -165,7 +165,7 @@ y += 2;
 
 ```zig
 // Recipe 1.1: Unpacking and Destructuring
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates how to unpack tuples and arrays into separate variables.
 // Run: zig test code/02-core/01-data-structures/recipe_1_1.zig
@@ -581,7 +581,7 @@ const str: [:0]const u8 = "hello";  // Null-terminated
 
 ```zig
 // Recipe 1.2: Working with Slices
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates how to work with Zig's slice type for safe array manipulation.
 // Run: zig test code/02-core/01-data-structures/recipe_1_2.zig
@@ -1128,7 +1128,7 @@ const RollingAverage = struct {
 
 ```zig
 // Recipe 1.3: Ring Buffers and Keeping Last N Items
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates how to use circular buffers to track the most recent N elements.
 // Run: zig test code/02-core/01-data-structures/recipe_1_3.zig
@@ -1786,7 +1786,7 @@ Learning/interview prep?
 
 ```zig
 // Recipe 1.4: Finding Largest or Smallest N Items
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates different approaches to finding top/bottom N elements efficiently.
 //
@@ -2586,7 +2586,7 @@ Memory: O(n) where n is the number of elements.
 
 ```zig
 // Recipe 1.5: Implementing a Priority Queue
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates using std.PriorityQueue for efficient priority-based ordering.
 // Run: zig test code/02-core/01-data-structures/recipe_1_5.zig
@@ -3279,7 +3279,7 @@ while (it.next()) |entry| {
 
 ```zig
 // Recipe 1.6: Mapping Keys to Multiple Values
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates how to create multimap structures where keys have multiple values.
 // Run: zig test code/02-core/01-data-structures/recipe_1_6.zig
@@ -3975,7 +3975,7 @@ const Config = struct {
 
 ```zig
 // Recipe 1.7: Keeping Dictionaries in Order
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates ArrayHashMap for maintaining insertion order in hash maps.
 // Run: zig test code/02-core/01-data-structures/recipe_1_7.zig
@@ -4812,7 +4812,7 @@ fn countWhere(map: std.AutoHashMap([]const u8, i32), min: i32) usize {
 
 ```zig
 // Recipe 1.8: Calculating with Dictionaries
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates calculations and transformations on HashMap values.
 // Run: zig test code/02-core/01-data-structures/recipe_1_8.zig
@@ -5761,7 +5761,7 @@ fn removeAll(set: *std.AutoHashMap(i32, void), to_remove: std.AutoHashMap(i32, v
 
 ```zig
 // Recipe 1.9: Finding Commonalities in Sets
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates set operations using HashMap with void values.
 // Run: zig test code/02-core/01-data-structures/recipe_1_9.zig
@@ -6696,7 +6696,7 @@ fn removeDuplicatesUnordered(
 
 ```zig
 // Recipe 1.10: Removing Duplicates While Maintaining Order
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates deduplication techniques while preserving insertion order.
 // Run: zig test code/02-core/01-data-structures/recipe_1_10.zig
@@ -7639,7 +7639,7 @@ const Position = struct {
 
 ```zig
 // Recipe 1.11: Naming Slices and Indices
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates using named constants and descriptive patterns for slice operations.
 // Run: zig test code/02-core/01-data-structures/recipe_1_11.zig
@@ -8678,7 +8678,7 @@ while (it2.next()) |entry| {
 
 ```zig
 // Recipe 1.12: Determining Most Frequently Occurring Items
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Demonstrates frequency counting and finding most common elements using HashMaps.
 // Run: zig test code/02-core/01-data-structures/recipe_1_12.zig
@@ -9834,7 +9834,7 @@ return a.optional.? < b.optional.?;
 
 ```zig
 // Recipe 1.13: Sorting a List of Structs by a Common Field
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates various sorting techniques, with special attention to
 // performance pitfalls when sorting by expensive-to-compute keys.
@@ -13400,7 +13400,7 @@ The pattern shown here - passing allocators explicitly, using `errdefer` for cle
 
 ```zig
 // Recipe 1.16: Filtering sequence elements
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates idiomatic filtering of sequence elements in Zig
 // using ArrayList and explicit loops rather than functional-style iterators.
@@ -13812,7 +13812,7 @@ Unlike languages with method chaining (`.filter().map().reduce()`), Zig prefers 
 
 ```zig
 // Recipe 1.17: Extracting a subset of a dictionary
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to extract a subset of key-value pairs from
 // a hashmap based on keys or value criteria.
@@ -14356,7 +14356,7 @@ The explicit approach to data modeling in Zig makes code more maintainable and c
 
 ```zig
 // Recipe 1.18: Mapping names to sequence elements
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates different approaches to naming and accessing
 // elements in sequences: structs, tuples, and enums. Each has different
@@ -14864,7 +14864,7 @@ This makes Zig ideal for systems programming where understanding exactly what th
 
 ```zig
 // Recipe 1.19: Transforming and reducing data simultaneously
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates idiomatic approaches to transforming and reducing
 // data in Zig using explicit loops rather than functional-style chains.
@@ -15526,7 +15526,7 @@ This is more efficient but destructive - use when you no longer need the origina
 
 ```zig
 // Recipe 1.20: Combining multiple mappings into a single mapping
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to merge multiple hashmaps into one,
 // handling key conflicts and preserving data from multiple sources.

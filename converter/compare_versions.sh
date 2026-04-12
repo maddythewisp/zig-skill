@@ -5,13 +5,13 @@ if [ $# -ne 2 ]; then
     echo "Usage: $0 <version1> <version2>"
     echo ""
     echo "Examples:"
-    echo "  $0 0.14.1 0.15.2"
-    echo "  $0 0.15.2 master"
+    echo "  $0 0.14.1 0.16.0"
+    echo "  $0 0.16.0 master"
     echo ""
     echo "Available versions:"
     echo "  0.1.1, 0.2.0, 0.3.0, 0.4.0, 0.5.0, 0.6.0"
     echo "  0.7.1, 0.8.1, 0.9.1, 0.10.1, 0.11.0, 0.12.1"
-    echo "  0.13.0, 0.14.1, 0.15.2, master"
+    echo "  0.13.0, 0.14.1, 0.16.0, master"
     exit 1
 fi
 

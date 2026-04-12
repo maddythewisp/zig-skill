@@ -1,6 +1,6 @@
 # Strings & Text Recipes
 
-*14 tested recipes for Zig 0.15.2*
+*14 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -238,7 +238,7 @@ Zig's approach is more memory-efficient since it returns an iterator rather than
 
 ```zig
 // Recipe 2.1: Splitting strings on any of multiple delimiters
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates various approaches to splitting strings in Zig
 // using the standard library's tokenization and splitting functions.
@@ -789,7 +789,7 @@ Zig's approach is more explicit but equally efficient, with the advantage of no 
 
 ```zig
 // Recipe 2.2: Matching text at the start or end of a string
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to check if strings start with or end with
 // specific prefixes or suffixes using Zig's standard library.
@@ -1434,7 +1434,7 @@ This glob implementation provides efficient, memory-safe wildcard matching perfe
 
 ```zig
 // Recipe 2.3: Matching strings using shell wildcard patterns
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates implementing simple glob-style wildcard matching
 // similar to shell filename patterns (* and ?).
@@ -2116,7 +2116,7 @@ This comprehensive set of search functions covers most text searching needs effi
 
 ```zig
 // Recipe 2.4: Matching and searching for text patterns
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates various string searching techniques in Zig
 // using std.mem functions for substring search and pattern matching.
@@ -2720,7 +2720,7 @@ const replacements = [_]ReplacePair{
 
 ```zig
 // Recipe 2.5: Searching and replacing text
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates various approaches to replacing text in strings,
 // including single replacement, global replacement, and replace all.
@@ -4004,7 +4004,7 @@ This comprehensive set of case-insensitive operations handles most text processi
 
 ```zig
 // Recipe 2.6: Searching and replacing case-insensitive text
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates case-insensitive string operations including
 // searching, replacing, and comparing text regardless of case.
@@ -4874,7 +4874,7 @@ This comprehensive set of string cleaning operations handles most text sanitizat
 
 ```zig
 // Recipe 2.7: Stripping unwanted characters
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates removing unwanted characters from strings,
 // including whitespace trimming, character filtering, and cleanup operations.
@@ -5816,7 +5816,7 @@ This comprehensive set of string combination operations handles most text buildi
 
 ```zig
 // Recipe 2.8: Combining and concatenating strings
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates various ways to combine and concatenate strings
 // using allocators, ArrayList, join, and format functions.
@@ -6729,7 +6729,7 @@ This comprehensive formatting system provides type-safe, efficient string interp
 
 ```zig
 // Recipe 2.9: Interpolating variables in strings
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates string formatting and variable interpolation
 // using std.fmt functions for building formatted strings.
@@ -7538,7 +7538,7 @@ This comprehensive text alignment system provides the building blocks for creati
 
 ```zig
 // Recipe 2.10: Aligning text strings
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates text alignment and formatting for tables,
 // columns, and structured output.
@@ -8421,7 +8421,7 @@ This comprehensive text reformatting system handles word wrapping, line breaking
 
 ```zig
 // Recipe 2.11: Reformatting text to fixed columns
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates text wrapping, word breaking, and reformatting
 // text to fit within fixed column widths.
@@ -9349,7 +9349,7 @@ This comprehensive guide covers proper UTF-8 handling in Zig, distinguishing bet
 
 ```zig
 // Recipe 2.12: Handling byte strings vs unicode strings
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates the difference between byte strings and Unicode strings,
 // UTF-8 iteration, validation, and proper Unicode handling in Zig.
@@ -10422,7 +10422,7 @@ For simple trimming, use Recipe 2.7's `std.mem.trim`. For complex sanitization, 
 
 ```zig
 // Recipe 2.13: Sanitizing and Cleaning Up Text
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Advanced text sanitization including whitespace normalization, line ending
 // conversion, URL encoding/decoding, ANSI escape code removal, and HTML entity
@@ -12297,7 +12297,7 @@ This recipe's value is in teaching FFI patterns, not in being production-ready U
 
 ```zig
 // Recipe 2.14: Standardizing Unicode text with ICU
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // EDUCATIONAL FOCUS: This recipe demonstrates C library interoperability patterns.
 // For production code, consider pure-Zig alternatives like Ziglyph.

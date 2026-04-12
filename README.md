@@ -4,10 +4,10 @@ Two comprehensive Zig programming skills for Claude Code:
 
 | Skill | Description | Size | Zig Version |
 |-------|-------------|------|-------------|
-| **zig-programming** | Complete Zig expertise with 223 recipes, multi-version docs, templates | ~1.8MB | 0.11 - 0.15.2 (stable) |
-| **zig-async** | Async I/O patterns with io_uring integration | ~24KB | 0.16+ (nightly only) |
+| **zig-programming** | Complete Zig expertise with 223 recipes, multi-version docs, templates | ~1.8MB | 0.11 - 0.16.0 (stable) |
+| **zig-async** | Async I/O patterns with io_uring integration | ~24KB | 0.16+ |
 
-> **Most users should only install `zig-programming`.** The `zig-async` skill is for Zig 0.16+ nightly builds which reintroduce async I/O. It is not compatible with stable Zig 0.15.2.
+> **Most users should only install `zig-programming`.** The `zig-async` skill is for Zig 0.16+ which reintroduces async I/O. It is not compatible with Zig 0.15.2 or earlier.
 
 ## Quick Installation
 
@@ -22,10 +22,10 @@ unzip zig-programming.zip -d ~/.claude/skills/zig-programming/
 ```
 
 <details>
-<summary>Async skill (Zig 0.16+ nightly only - not for stable 0.15.2)</summary>
+<summary>Async skill (Zig 0.16+ only - not for 0.15.2 or earlier)</summary>
 
 ```bash
-# Only install if using Zig 0.16+ nightly builds
+# Only install if using Zig 0.16+
 curl -LO https://github.com/whit3rabbit/claude-zig-skill/raw/main/zig-async-skill.zip
 unzip zig-async-skill.zip -d ~/.claude/skills/zig-async-skill/
 ```
@@ -42,7 +42,7 @@ Restart Claude Code after installation.
 # Install main skill (recommended for all users)
 /plugin install zig-programming@whit3rabbit-claude-zig-skill
 
-# Optional: Install async skill (only for Zig 0.16+ nightly)
+# Optional: Install async skill (only for Zig 0.16+)
 # /plugin install zig-async@whit3rabbit-claude-zig-skill
 ```
 
@@ -91,8 +91,8 @@ The main skill for all Zig programming needs.
 
 | Version | Status |
 |---------|--------|
-| 0.15.2 | Current stable (default) |
-| 0.14.1, 0.13.0, 0.12.1, 0.11.0 | Fully supported |
+| 0.16.0 | Current stable (default) |
+| 0.15.2, 0.14.1, 0.13.0, 0.12.1, 0.11.0 | Supported |
 | 0.10.1, 0.9.1, 0.8.1, 0.7.1 | Legacy support |
 | 0.6.0, 0.3.0, 0.2.0 | Historical |
 | master | Development |
@@ -101,7 +101,7 @@ The main skill for all Zig programming needs.
 
 ## zig-async Skill
 
-> **Warning: Nightly Only** - This skill is for Zig 0.16+ nightly builds only. Do NOT install if you're using stable Zig 0.15.2 or earlier. The async I/O model in 0.16+ is completely different from the removed async/suspend/resume in older versions.
+> **Note: Zig 0.16+ Only** - This skill targets Zig 0.16.0 and later. Do NOT install if you're using Zig 0.15.2 or earlier. The async I/O model in 0.16+ is completely different from the removed async/suspend/resume in older versions.
 
 Specialized skill for Zig's new async I/O model being developed for version 0.16+.
 
@@ -125,9 +125,8 @@ Specialized skill for Zig's new async I/O model being developed for version 0.16
 
 | Zig Version | Use This Skill? |
 |-------------|-----------------|
-| 0.15.2 (current stable) | No - use `zig-programming` only |
-| 0.14.x and earlier | No - use `zig-programming` only |
-| 0.16+ nightly | Yes - async I/O is available |
+| 0.16.0 (current stable) | Yes - async I/O is available |
+| 0.15.2 and earlier | No - use `zig-programming` only |
 
 ---
 
@@ -143,10 +142,10 @@ You: "Show me how to use ArenaAllocator"
 Claude: [Loads Recipe 18.2 with tested code]
 
 You: "How does async I/O work in Zig 0.16?"
-Claude: [Uses zig-async skill for io_uring patterns - requires 0.16+ nightly]
+Claude: [Uses zig-async skill for io_uring patterns - requires 0.16+]
 ```
 
-> **Note:** For stable Zig (0.15.2 and earlier), only the `zig-programming` skill is needed. Async I/O patterns are only available in Zig 0.16+ nightly builds.
+> **Note:** For Zig 0.15.2 and earlier, only the `zig-programming` skill is needed. Async I/O patterns are only available in Zig 0.16+.
 
 ---
 
@@ -245,7 +244,7 @@ Restart Claude Code after changes.
 
 Add to your project's `CLAUDE.md`:
 ```markdown
-This project targets Zig 0.15.2
+This project targets Zig 0.16.0
 ```
 
 ---
@@ -263,4 +262,4 @@ MIT License. Zig documentation content follows Zig project licensing.
 
 ---
 
-**Version:** 1.1.0 | **Skills:** zig-programming, zig-async | **Recipes:** 223
+**Version:** 1.2.0 | **Skills:** zig-programming, zig-async | **Recipes:** 223

@@ -1,6 +1,6 @@
 # Structs, Unions & Objects Recipes
 
-*22 tested recipes for Zig 0.15.2*
+*22 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -57,7 +57,7 @@ const Point = struct {
 };
 ```
 
-**Note:** In Zig 0.15.2, use `{f}` to call the custom `format` function, or `{any}` to use default struct representation.
+**Note:** In Zig 0.16.0, use `{f}` to call the custom `format` function, or `{any}` to use default struct representation.
 
 ### Discussion
 
@@ -457,9 +457,9 @@ test "format options" {
 
 ### Best Practices
 
-**Zig 0.15.2 Format Signature:**
+**Zig 0.16.0 Format Signature:**
 ```zig
-// Correct signature for Zig 0.15.2
+// Correct signature for Zig 0.16.0
 pub fn format(self: @This(), writer: anytype) !void {
     try writer.print("...", .{...});
 }
@@ -2305,7 +2305,7 @@ pub fn create(allocator: std.mem.Allocator) !*MyStruct {
 
 ```zig
 // Recipe 8.3: Making Objects Support the Context-Management Protocol
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 
@@ -3179,7 +3179,7 @@ const Config = packed struct {
 
 ```zig
 // Recipe 8.4: Saving Memory When Creating Many Instances
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 
@@ -4036,7 +4036,7 @@ const Implementation = struct {
 
 ```zig
 // Recipe 8.5: Encapsulating Names in a Struct
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 
@@ -4866,7 +4866,7 @@ This follows Zig's principle of making memory allocation explicit.
 
 ```zig
 // Recipe 8.6: Creating Managed Attributes
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -5897,7 +5897,7 @@ For structs with many delegated methods, consider using `comptime` to generate d
 
 ```zig
 // Recipe 8.7: Calling a Method on a Parent Class
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -7067,7 +7067,7 @@ Use property extension when you want to:
 
 ```zig
 // Recipe 8.8: Extending a Property in a Subclass
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -7989,7 +7989,7 @@ All attribute systems shown here have zero runtime overhead:
 
 ```zig
 // Recipe 8.9: Creating a New Kind of Class or Instance Attribute
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -8925,7 +8925,7 @@ The patterns shown are not thread-safe. For concurrent access:
 
 ```zig
 // Recipe 8.10: Using Lazily Computed Properties
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -9918,7 +9918,7 @@ test "email validates format" {
 
 ```zig
 // Recipe 8.11: Simplifying the Initialization of Data Structures
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -10900,7 +10900,7 @@ Callers must handle errors with `try` or `catch`.
 
 ```zig
 // Recipe 8.12: Defining an Interface or Abstract Base Class
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -11804,7 +11804,7 @@ Specific errors help callers provide better feedback to users.
 
 ```zig
 // Recipe 8.13: Implementing a Data Model or Type System
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -12772,7 +12772,7 @@ The compiler enforces type requirements automatically.
 
 ```zig
 // Recipe 8.14: Implementing Custom Containers
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -13815,7 +13815,7 @@ pub fn write(self: Writer, data: []const u8) !void {
 
 ```zig
 // Recipe 8.15: Delegating Attribute Access
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -14930,7 +14930,7 @@ Zig's approach is most similar to Rust, but simpler because Zig structs are just
 
 ```zig
 // Recipe 8.16: Defining More Than One Constructor in a Class
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -15890,7 +15890,7 @@ Use **comptime instances** when:
 
 ```zig
 // Recipe 8.17: Creating an Instance Without Invoking Init
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -16840,7 +16840,7 @@ Zig's approach is simpler and more explicit than these alternatives.
 
 ```zig
 // Recipe 8.18: Extending Classes with Mixins
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -18110,7 +18110,7 @@ self.onEnter(new_state);
 
 ```zig
 // Recipe 8.19: Implementing Stateful Objects or State Machines
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -19367,7 +19367,7 @@ Don't use visitors when:
 
 ```zig
 // Recipe 8.20: Implementing the Visitor Pattern
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -20537,7 +20537,7 @@ test "no memory leaks" {
 
 ```zig
 // Recipe 8.21: Managing Memory in Cyclic Data Structures
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;
@@ -21703,7 +21703,7 @@ test "hash consistency" {
 
 ```zig
 // Recipe 8.22: Making Classes Support Comparison Operations
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 
 const std = @import("std");
 const testing = std.testing;

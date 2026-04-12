@@ -13,7 +13,7 @@ Usage:
 
 Output:
     JSON with detected version, confidence level, and detection source
-    Example: {"version": "0.15.2", "confidence": "high", "source": "zig_command"}
+    Example: {"version": "0.16.0", "confidence": "high", "source": "zig_command"}
 """
 
 import argparse
@@ -33,7 +33,7 @@ class ZigVersionDetector:
     SUPPORTED_VERSIONS = [
         '0.2.0', '0.3.0', '0.6.0', '0.7.1', '0.8.1',
         '0.9.1', '0.10.1', '0.11.0', '0.12.1',
-        '0.13.0', '0.14.1', '0.15.2', 'master'
+        '0.13.0', '0.14.1', '0.15.2', '0.16.0', 'master'
     ]
 
     # Detection confidence levels
@@ -76,12 +76,12 @@ class ZigVersionDetector:
             return result
 
         # Default fallback
-        self.log("No version detected, defaulting to 0.15.2")
+        self.log("No version detected, defaulting to 0.16.0")
         return {
-            "version": "0.15.2",
+            "version": "0.16.0",
             "confidence": self.CONFIDENCE_LOW,
             "source": "default",
-            "note": "No detection markers found, using current stable version"
+            "note": "No detection markers found, using current stable version (0.16.0)"
         }
 
     def _detect_from_command(self) -> Optional[Dict[str, str]]:
@@ -163,9 +163,9 @@ class ZigVersionDetector:
 
             if has_std_build or has_b_path or has_struct_literal_add:
                 self.log("Detected modern build API (0.11+)")
-                # Could be 0.11-0.15, default to current stable
+                # Could be 0.11-0.16, default to current stable
                 return {
-                    "version": "0.15.2",
+                    "version": "0.16.0",
                     "confidence": self.CONFIDENCE_MEDIUM,
                     "source": "build.zig_modern_api",
                     "note": "Detected 0.11+ API, exact version unknown"

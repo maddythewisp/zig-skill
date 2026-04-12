@@ -1,6 +1,6 @@
 # Memory & Allocators Recipes
 
-*6 tested recipes for Zig 0.15.2*
+*6 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -269,7 +269,7 @@ Custom allocators give you precise control over memory management, enabling spec
 
 ### The Allocator Interface
 
-In Zig 0.15.2, the `std.mem.Allocator` interface requires a VTable with four functions:
+In Zig 0.16.0, the `std.mem.Allocator` interface requires a VTable with four functions:
 
 **alloc**: Allocate memory of a given size and alignment. Returns a pointer or null on failure.
 
@@ -287,7 +287,7 @@ Each function receives:
 
 ### Alignment Handling
 
-Zig 0.15.2 introduced `std.mem.Alignment` as a type-safe replacement for raw `u8` values:
+Zig 0.16.0 introduced `std.mem.Alignment` as a type-safe replacement for raw `u8` values:
 
 ```zig
 fn alloc(ctx: *anyopaque, len: usize, ptr_align: std.mem.Alignment, ret_addr: usize) ?[*]u8
@@ -351,7 +351,7 @@ This verifies your code correctly handles allocation failures, a critical requir
 
 ### The remap Function
 
-The `remap` function is required in Zig 0.15.2's allocator interface. It attempts to reallocate memory to a new size, potentially moving it to a different location.
+The `remap` function is required in Zig 0.16.0's allocator interface. It attempts to reallocate memory to a new size, potentially moving it to a different location.
 
 For simple allocators that don't support reallocation:
 

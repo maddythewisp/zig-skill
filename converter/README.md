@@ -8,7 +8,7 @@ Convert official Zig documentation from HTML to organized markdown files. Downlo
 
 ```bash
 cd ../zig-programming
-python scripts/build_references.py --version 0.15.2
+python scripts/build_references.py --version 0.16.0
 ```
 
 This automatically handles conversion, consolidation, and cleanup in one command. See [Integration with Zig Programming Skill](#integration-with-zig-programming-skill) below.
@@ -65,7 +65,7 @@ pip install -r requirements.txt
 python zig_docs_converter.py
 
 # Download specific version
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 
 # Download all versions (takes 8-15 minutes)
 python zig_docs_converter.py --all
@@ -74,7 +74,7 @@ python zig_docs_converter.py --all
 python zig_docs_converter.py --file "Documentation - The Zig Programming Language.html"
 
 # Custom output directory
-python zig_docs_converter.py --version 0.15.2 --output ../my-docs
+python zig_docs_converter.py --version 0.16.0 --output ../my-docs
 
 # Enable verbose logging
 python zig_docs_converter.py --verbose
@@ -84,7 +84,7 @@ python zig_docs_converter.py --verbose
 
 **Download multiple specific versions:**
 ```bash
-for version in 0.13.0 0.14.1 0.15.2 master; do
+for version in 0.13.0 0.14.1 0.16.0 master; do
     python zig_docs_converter.py --version $version
 done
 ```
@@ -119,7 +119,7 @@ python zig_docs_converter.py --file zig-master.html
 **Unified build pipeline** uses `.temp/docs-{version}/` (auto-cleaned after consolidation).
 
 ```
-docs-0.15.2/
+docs-0.16.0/
 ├── README.md                    # Table of contents with version info
 ├── 01-introduction.md           # Introduction and overview
 ├── 02-zig-standard-library.md   # Standard library overview
@@ -146,7 +146,7 @@ docs-0.15.2/
 ## Available Versions
 
 **Stable Releases:**
-`0.1.1` | `0.2.0` | `0.3.0` | `0.4.0` | `0.5.0` | `0.6.0` | `0.7.1` | `0.8.1` | `0.9.1` | `0.10.1` | `0.11.0` | `0.12.1` | `0.13.0` | `0.14.1` | `0.15.2`
+`0.1.1` | `0.2.0` | `0.3.0` | `0.4.0` | `0.5.0` | `0.6.0` | `0.7.1` | `0.8.1` | `0.9.1` | `0.10.1` | `0.11.0` | `0.12.1` | `0.13.0` | `0.14.1` | `0.16.0`
 
 **Development:**
 `master`
@@ -159,17 +159,17 @@ Compare changes between Zig versions:
 
 ```bash
 # Using the compare script
-./compare_versions.sh 0.14.1 0.15.2 27-functions.md
+./compare_versions.sh 0.14.1 0.16.0 27-functions.md
 
 # Using diff directly
 cd ..
-diff -u zig-programming/docs-0.14.1/27-functions.md zig-programming/docs-0.15.2/27-functions.md
+diff -u zig-programming/docs-0.14.1/27-functions.md zig-programming/docs-0.16.0/27-functions.md
 
 # Compare entire versions
-diff -ru zig-programming/docs-0.14.1/ zig-programming/docs-0.15.2/
+diff -ru zig-programming/docs-0.14.1/ zig-programming/docs-0.16.0/
 
 # Find what changed in builtin functions
-diff zig-programming/docs-0.14.1/37-builtin-functions.md zig-programming/docs-0.15.2/37-builtin-functions.md | grep "^[<>]" | head -20
+diff zig-programming/docs-0.14.1/37-builtin-functions.md zig-programming/docs-0.16.0/37-builtin-functions.md | grep "^[<>]" | head -20
 ```
 
 ## How It Works
@@ -325,7 +325,7 @@ The converter is part of an automated build pipeline for the Zig Programming Ski
 
 ```bash
 cd ../zig-programming
-python scripts/build_references.py --version 0.15.2
+python scripts/build_references.py --version 0.16.0
 ```
 
 This unified pipeline automatically:
@@ -348,11 +348,11 @@ See `../zig-programming/scripts/README.md` for detailed documentation.
 ```bash
 # Run converter directly (creates files in ../zig-programming/docs-{version}/)
 cd converter
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 
 # Then manually consolidate if needed
 cd ../zig-programming
-python scripts/consolidator.py ../converter/docs-0.15.2 skill/references/v0.15.2 --version 0.15.2
+python scripts/consolidator.py ../converter/docs-0.16.0 skill/references/v0.16.0 --version 0.16.0
 ```
 
 **When to use standalone mode:**
@@ -377,7 +377,7 @@ When a new Zig version is released:
 Edit `zig_docs_converter.py` (around line 680):
 ```python
 AVAILABLE_VERSIONS = [
-    '0.1.1', '0.2.0', ..., '0.15.2', '0.16.0', 'master'
+    '0.1.1', '0.2.0', ..., '0.16.0', '0.16.0', 'master'
 ]
 ```
 
@@ -441,13 +441,13 @@ grep -r "\[.*\](.*\.md" ../zig-programming/.temp/docs-0.16.0/ | head
 **Testing changes:**
 ```bash
 # Test on multiple versions
-for v in 0.11.0 0.13.0 0.15.2 master; do
+for v in 0.11.0 0.13.0 0.16.0 master; do
     echo "Testing $v..."
     python zig_docs_converter.py --version $v --verbose
 done
 
 # Verify no regressions
-./compare_versions.sh 0.15.2 0.15.2 37-builtin-functions.md
+./compare_versions.sh 0.16.0 0.16.0 37-builtin-functions.md
 # Should show no differences
 ```
 

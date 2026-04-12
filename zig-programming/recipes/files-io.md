@@ -1,6 +1,6 @@
 # Files & I/O Recipes
 
-*19 tested recipes for Zig 0.15.2*
+*19 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -202,7 +202,7 @@ pub fn processLargeFile(
 
 ### Discussion
 
-### Zig 0.15.2 I/O API
+### Zig 0.16.0 I/O API
 
 Starting with Zig 0.15.1, the I/O system was redesigned with buffered I/O as the default. Key changes:
 
@@ -361,7 +361,7 @@ with open('file.txt', 'r') as f:
 
 ```zig
 // Recipe 5.1: Reading and writing text data
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to efficiently read and write text files using
 // buffered I/O operations, handle line-by-line processing, and manage file resources.
@@ -1097,7 +1097,7 @@ writer.print("Data: {}\n", .{value}) catch |err| {
 
 ### Performance Considerations
 
-**Buffered writing is automatic** with the new Zig 0.15.2 API. The buffer you provide to `file.writer(&buffer)` is used for batching write operations.
+**Buffered writing is automatic** with the new Zig 0.16.0 API. The buffer you provide to `file.writer(&buffer)` is used for batching write operations.
 
 **Buffer size matters:**
 - Smaller buffers (1KB-4KB): More frequent flushes, good for logs
@@ -1164,7 +1164,7 @@ fclose(f);
 
 ```zig
 // Recipe 5.2: Printing to a file
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to use formatted printing to write data to files,
 // similar to how std.debug.print works for stdout but directed to file handles.
@@ -2075,7 +2075,7 @@ writer.writerow(row)
 
 ```zig
 // Recipe 5.3: Printing with different separators and line endings
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to customize output formatting with different
 // separators, delimiters, and line endings for various file formats.
@@ -3105,7 +3105,7 @@ fclose(f);
 
 ```zig
 // Recipe 5.4: Reading and writing binary data
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates reading and writing binary data to files, including
 // integers, floats, packed structs, and handling endianness for cross-platform files.
@@ -5208,7 +5208,7 @@ var dec = Decompress.init(&reader, .gzip, &.{});
 
 ### Note on Compression
 
-As of Zig 0.15.2, the compression side of `std.compress.flate` is not yet fully implemented. For creating gzip/zlib files, you'll need to:
+As of Zig 0.16.0, the compression side of `std.compress.flate` is not yet fully implemented. For creating gzip/zlib files, you'll need to:
 
 1. Use external tools (`gzip`, `zlib`)
 2. Wait for Zig stdlib completion
@@ -18956,7 +18956,7 @@ const User = struct {
     active: bool,
 };
 
-/// Serialize to JSON (manual implementation for Zig 0.15.2)
+/// Serialize to JSON (manual implementation for Zig 0.16.0)
 pub fn serializeToJson(allocator: std.mem.Allocator, user: User) ![]u8 {
     return std.fmt.allocPrint(allocator,
         \\{{"id":{d},"name":"{s}","active":{s}}}

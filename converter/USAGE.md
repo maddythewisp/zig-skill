@@ -30,9 +30,9 @@ Output: `docs-master/` directory
 ### Download Specific Version
 
 ```bash
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 ```
-Output: `docs-0.15.2/` directory
+Output: `docs-0.16.0/` directory
 
 ### Download All Versions
 
@@ -45,7 +45,7 @@ Output: `docs-0.1.1/`, `docs-0.2.0/`, ..., `docs-master/`
 
 - `0.1.1`, `0.2.0`, `0.3.0`, `0.4.0`, `0.5.0`, `0.6.0`
 - `0.7.1`, `0.8.1`, `0.9.1`, `0.10.1`, `0.11.0`, `0.12.1`
-- `0.13.0`, `0.14.1`, `0.15.2`
+- `0.13.0`, `0.14.1`, `0.16.0`
 - `master` (latest development version)
 
 ## All Options
@@ -57,7 +57,7 @@ Output: `docs-0.1.1/`, `docs-0.2.0/`, ..., `docs-master/`
 python zig_docs_converter.py
 
 # Specific version
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 python zig_docs_converter.py -v 0.14.1
 
 # All versions
@@ -81,7 +81,7 @@ python zig_docs_converter.py --url https://ziglang.org/documentation/0.14.1/
 
 ```bash
 # With version download
-python zig_docs_converter.py --version 0.15.2 --output my-custom-dir
+python zig_docs_converter.py --version 0.16.0 --output my-custom-dir
 
 # With local file
 python zig_docs_converter.py --file docs.html --output my-docs
@@ -105,10 +105,10 @@ Options:
 
 ### Single Version
 
-When downloading a single version (e.g., `--version 0.15.2`):
+When downloading a single version (e.g., `--version 0.16.0`):
 
 ```
-docs-0.15.2/
+docs-0.16.0/
 ├── README.md                      # Table of contents with version info
 ├── 01-introduction.md             # Introduction section
 ├── 02-zig-standard-library.md     # Zig Standard Library section
@@ -134,7 +134,7 @@ zig-docs/
 │   ├── 01-introduction.md
 │   └── ...
 ├── ...
-├── docs-0.15.2/
+├── docs-0.16.0/
 │   ├── README.md
 │   ├── 01-introduction.md
 │   └── ...
@@ -148,7 +148,7 @@ zig-docs/
 
 ✓ **Version Management** - Download specific versions or all versions at once
 ✓ **16 Zig versions** - Support for all releases from 0.1.1 to master
-✓ **Auto-organized** - Each version in its own directory (e.g., `docs-0.15.2/`)
+✓ **Auto-organized** - Each version in its own directory (e.g., `docs-0.16.0/`)
 ✓ **51 separate files** - One per major documentation section
 ✓ **Preserved formatting** - Code blocks with syntax types (zig, shell, c, etc.)
 ✓ **Cross-file links** - Internal links automatically updated to point to correct files
@@ -200,7 +200,7 @@ python zig_docs_converter.py
 
 ```bash
 # Latest stable release
-python zig_docs_converter.py --version 0.15.2
+python zig_docs_converter.py --version 0.16.0
 
 # Older version
 python zig_docs_converter.py --version 0.14.1

@@ -1,6 +1,6 @@
 # Fundamentals & Philosophy Recipes
 
-*19 tested recipes for Zig 0.15.2*
+*19 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -361,7 +361,7 @@ But here's what you get:
 
 ```zig
 // Recipe 0.1: Understanding Zig's Philosophy
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates the core principles that make Zig different from
 // other languages. These examples show why Zig makes the choices it does.
@@ -644,29 +644,29 @@ After installing via package manager, skip to **Step 3: Verify Installation**.
 
 ### Option B: Manual Download
 
-If you need a specific version (like 0.15.2 for this cookbook) or your package manager doesn't have Zig, download it manually.
+If you need a specific version (like 0.16.0 for this cookbook) or your package manager doesn't have Zig, download it manually.
 
 #### Step 1: Download Zig
 
 Visit [https://ziglang.org/download/](https://ziglang.org/download/) and choose:
 
-- **0.15.2** (stable - recommended for this cookbook)
+- **0.16.0** (stable - recommended for this cookbook)
 - Or the latest development build if you want cutting-edge features
 
 Download the archive for your platform:
-- **macOS**: `zig-macos-aarch64-0.15.2.tar.xz` (Apple Silicon) or `zig-macos-x86_64-0.15.2.tar.xz` (Intel)
-- **Linux**: `zig-linux-x86_64-0.15.2.tar.xz` or your architecture
-- **Windows**: `zig-windows-x86_64-0.15.2.zip`
+- **macOS**: `zig-macos-aarch64-0.16.0.tar.xz` (Apple Silicon) or `zig-macos-x86_64-0.16.0.tar.xz` (Intel)
+- **Linux**: `zig-linux-x86_64-0.16.0.tar.xz` or your architecture
+- **Windows**: `zig-windows-x86_64-0.16.0.zip`
 
 #### Step 2: Extract and Add to PATH
 
 **macOS/Linux:**
 ```bash
 # Extract
-tar xf zig-macos-aarch64-0.15.2.tar.xz
+tar xf zig-macos-aarch64-0.16.0.tar.xz
 
 # Move to a permanent location
-sudo mv zig-macos-aarch64-0.15.2 /usr/local/zig
+sudo mv zig-macos-aarch64-0.16.0 /usr/local/zig
 
 # Add to PATH (add this to your ~/.zshrc or ~/.bashrc)
 export PATH="/usr/local/zig:$PATH"
@@ -689,7 +689,7 @@ Run these commands to verify Zig is installed correctly:
 ```bash
 # Check version
 zig version
-# Should output: 0.15.2 (or your installed version)
+# Should output: 0.16.0 (or your installed version)
 
 # Check environment
 zig env
@@ -741,7 +741,7 @@ If you see "All 1 tests passed", you're ready to go!
 
 When you run `zig version`, you'll see output like:
 ```
-0.15.2
+0.16.0
 ```
 
 This tells you exactly which version of Zig you're running. This matters because Zig is still evolving, and different versions have different features and APIs.
@@ -756,7 +756,7 @@ The `zig env` command shows your environment configuration:
   "lib_dir": "/usr/local/zig/lib",
   "std_dir": "/usr/local/zig/lib/std",
   "global_cache_dir": "/Users/you/.cache/zig",
-  "version": "0.15.2"
+  "version": "0.16.0"
 }
 ```
 
@@ -961,7 +961,7 @@ zig init-lib             # Create a new library project
 - **Solution**: You have multiple Zig installations. Check `which zig` (Unix) or `where zig` (Windows) to see which one is being used.
 
 **Problem**: Tests fail with weird errors
-- **Solution**: Make sure you're using Zig 0.15.2. Earlier versions have different APIs.
+- **Solution**: Make sure you're using Zig 0.16.0. Earlier versions have different APIs.
 
 **Problem**: Editor doesn't recognize Zig
 - **Solution**: Install the Zig Language Server (ZLS) for your editor. See [zigtools.org](https://zigtools.org/) for setup.
@@ -970,7 +970,7 @@ zig init-lib             # Create a new library project
 
 ```zig
 // Recipe 0.2: Installing Zig and Verifying Your Toolchain
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to verify your Zig installation and use
 // basic toolchain commands. These examples assume Zig is already installed.
@@ -1422,7 +1422,7 @@ try stdout.print("Hello, {s}!\n", .{name});
 
 // Multiple arguments
 const lang = "Zig";
-const version = "0.15.2";
+const version = "0.16.0";
 try stdout.print("Language: {s}, Version: {s}\n", .{ lang, version });
 ```
 
@@ -1518,7 +1518,7 @@ Tests don't execute `main()`. They run the test blocks instead. This is why we h
 
 ```zig
 // Recipe 0.3: Your First Zig Program
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to write a basic Zig program with main(),
 // understand return types, and work with exit codes.
@@ -1676,7 +1676,7 @@ test "understanding print formatting" {
 test "multiple print arguments" {
     // You can print multiple values
     const name = "Zig";
-    const version = "0.15.2";
+    const version = "0.16.0";
 
     const msg = std.fmt.allocPrint(
         testing.allocator,
@@ -2057,7 +2057,7 @@ const y = x;  // Undefined behavior!
 
 ```zig
 // Recipe 0.4: Variables, Constants, and Type Inference
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates how to declare variables and constants,
 // understand mutability, and work with type inference.
@@ -2655,7 +2655,7 @@ You'll rarely use `void` as a variable type, but you'll see it as return types f
 
 ```zig
 // Recipe 0.5: Primitive Data and Basic Arrays
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates Zig's primitive types (integers, floats, booleans)
 // and basic fixed-size arrays.
@@ -2936,7 +2936,7 @@ test "void type" {
 
 ```zig
 // Recipe 0.6: Arrays, ArrayLists, and Slices (CRITICAL)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This is the #1 confusion point for Zig beginners!
 // This recipe clarifies the three fundamental sequence types in Zig.
@@ -3692,7 +3692,7 @@ std.debug.print("{d}\n", .{42});  // fixed - {d} for integers
 
 ```zig
 // Recipe 0.7: Functions and the Standard Library (EXPANDED)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe covers defining functions, working with the standard library,
 // and introduces basic comptime parameters for generic functions.
@@ -4503,7 +4503,7 @@ for (0..10) |i| { }
 
 ```zig
 // Recipe 0.8: Control Flow and Iteration
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe demonstrates Zig's control flow constructs: if, switch, while, for,
 // and how to use break, continue, and labeled blocks.
@@ -5359,7 +5359,7 @@ ptr.* = 100;  // error: cannot assign to constant
 
 ```zig
 // Recipe 0.9: Understanding Pointers and References (CRITICAL)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This is essential for beginners from garbage-collected languages.
 // Understand when and how to use pointers in Zig.
@@ -6260,7 +6260,7 @@ switch (val) {
 
 ```zig
 // Recipe 0.10: Structs, Enums, and Simple Data Models
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe covers creating custom types with structs, enums,
 // and tagged unions for simple data modeling.
@@ -7176,7 +7176,7 @@ Fix: Put errdefer after the allocation.
 
 ```zig
 // Recipe 0.11: Optionals, Errors, and Resource Cleanup (EXPANDED)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe covers optionals (?T), error unions (!T), and resource cleanup
 // with defer and errdefer.
@@ -8035,7 +8035,7 @@ const data = try allocator.alloc(u8, huge_size);
 
 ```zig
 // Recipe 0.12: Understanding Allocators (CRITICAL)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This is critical for beginners from garbage-collected languages.
 // Zig requires explicit memory allocation - no hidden allocations.
@@ -8804,7 +8804,7 @@ try testing.expectApproxEqAbs(0.3, f, 0.0001);  // Correct
 
 ```zig
 // Recipe 0.13: Testing and Debugging Fundamentals
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe covers creating tests, using std.testing, and debugging techniques.
 
@@ -9564,7 +9564,7 @@ zig build -Dtarget=aarch64-linux
 
 ```zig
 // Recipe 0.14: Projects, Modules, and Dependencies
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // This recipe covers project structure, modules, and the build system.
 

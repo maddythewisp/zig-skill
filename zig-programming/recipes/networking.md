@@ -1,6 +1,6 @@
 # Networking & Web Recipes
 
-*18 tested recipes for Zig 0.15.2*
+*18 tested recipes for Zig 0.16.0*
 
 ## Quick Reference
 
@@ -603,7 +603,7 @@ try testing.expectEqual(ContentType.json, parsed.?);
 
 ```zig
 // Recipe 11.1: Making HTTP Requests
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Educational demonstration of HTTP client patterns in Zig.
 // This code shows the structure and API design for HTTP clients
@@ -1676,7 +1676,7 @@ try testing.expectEqualStrings("value", nested.get("key").?.string);
 
 ```zig
 // Recipe 11.2: Working with JSON APIs
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Educational demonstration of JSON API patterns in Zig.
 // Shows JSON parsing, serialization, and API interaction patterns.
@@ -2784,7 +2784,7 @@ handler.receivePong(2000);
 
 ```zig
 // Recipe 11.3: WebSocket Communication
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Educational demonstration of WebSocket patterns in Zig.
 // Shows WebSocket frame structure, handshake, and message handling patterns.
@@ -3991,7 +3991,7 @@ try testing.expectEqualStrings("application/json", content_type.?);
 
 ```zig
 // Recipe 11.4: Building a Simple HTTP Server
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 //
 // Educational demonstration of HTTP server patterns in Zig.
 // Shows request parsing, response building, routing, and middleware patterns.
@@ -10128,9 +10128,9 @@ defer req.deinit();
 - Verify content types
 - Use HTTPS for sensitive transfers
 
-### Zig 0.15.2 ArrayList API
+### Zig 0.16.0 ArrayList API
 
-This code uses the unmanaged ArrayList pattern in Zig 0.15.2:
+This code uses the unmanaged ArrayList pattern in Zig 0.16.0:
 
 ```zig
 var buffer = std.ArrayList(u8){};
@@ -14682,7 +14682,7 @@ Use an allocator for dynamic arrays of connections. The testing allocator helps 
 
 ```zig
 // Recipe 20.1: Implementing non-blocking TCP servers with epoll/kqueue
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const posix = std.posix;
@@ -15381,7 +15381,7 @@ For very large files, transfer in chunks to:
 
 ```zig
 // Recipe 20.2: Zero-copy networking using sendfile
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const posix = std.posix;
@@ -16127,7 +16127,7 @@ This keeps the struct layout simple while providing convenient access.
 
 ```zig
 // Recipe 20.3: Parsing raw packets with packed structs
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const mem = std.mem;
@@ -16926,7 +16926,7 @@ For most applications, HTTP/1.1 is sufficient and simpler to implement.
 
 ```zig
 // Recipe 20.4: Implementing a basic HTTP/1.1 parser from scratch
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const mem = std.mem;
@@ -17529,7 +17529,7 @@ For reliability, add:
 
 ```zig
 // Recipe 20.5: Using UDP multicast
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const posix = std.posix;
@@ -17942,7 +17942,7 @@ Raw sockets are powerful and dangerous:
 
 ```zig
 // Recipe 20.6: Creating raw sockets (reading raw ethernet frames)
-// Target Zig Version: 0.15.2
+// Target Zig Version: 0.16.0
 const std = @import("std");
 const testing = std.testing;
 const posix = std.posix;
