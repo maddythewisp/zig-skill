@@ -1,6 +1,6 @@
 {
   "version": "0.16.0",
-  "total_recipes": 223,
+  "total_recipes": 258,
   "recipes": [
     {
       "id": "0.1",
@@ -198,6 +198,18 @@
       ]
     },
     {
+      "id": "1.1",
+      "title": "Unpacking Sequences into Separate Variables",
+      "code_file": "code/02-core/01-data-structures/recipe_1_1.zig",
+      "topic": "data-structures",
+      "tags": [
+        "data-structures",
+        "error-handling",
+        "slices",
+        "testing"
+      ]
+    },
+    {
       "id": "1.2",
       "title": "Error Handling Patterns",
       "code_file": "code/01-foundation/recipe_0_2.zig",
@@ -208,54 +220,6 @@
         "fundamentals",
         "memory",
         "resource-cleanup"
-      ]
-    },
-    {
-      "id": "1.3",
-      "title": "Testing Strategy",
-      "code_file": "code/01-foundation/recipe_0_3.zig",
-      "topic": "fundamentals",
-      "tags": [
-        "allocators",
-        "arraylist",
-        "c-interop",
-        "data-structures",
-        "error-handling"
-      ]
-    },
-    {
-      "id": "1.4",
-      "title": "When to Pass by Pointer vs Value",
-      "code_file": "code/01-foundation/recipe_0_4.zig",
-      "topic": "fundamentals",
-      "tags": [
-        "fundamentals",
-        "pointers",
-        "slices"
-      ]
-    },
-    {
-      "id": "1.5",
-      "title": "Build Modes and Safety",
-      "code_file": "code/01-foundation/recipe_0_5.zig",
-      "topic": "fundamentals",
-      "tags": [
-        "error-handling",
-        "fundamentals",
-        "pointers",
-        "testing"
-      ]
-    },
-    {
-      "id": "1.1",
-      "title": "Unpacking Sequences into Separate Variables",
-      "code_file": "code/02-core/01-data-structures/recipe_1_1.zig",
-      "topic": "data-structures",
-      "tags": [
-        "data-structures",
-        "error-handling",
-        "slices",
-        "testing"
       ]
     },
     {
@@ -273,6 +237,19 @@
     },
     {
       "id": "1.3",
+      "title": "Testing Strategy",
+      "code_file": "code/01-foundation/recipe_0_3.zig",
+      "topic": "fundamentals",
+      "tags": [
+        "allocators",
+        "arraylist",
+        "c-interop",
+        "data-structures",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "1.3",
       "title": "Ring Buffers for Fixed-Size Sequences",
       "code_file": "code/02-core/01-data-structures/recipe_1_3.zig",
       "topic": "data-structures",
@@ -286,6 +263,17 @@
     },
     {
       "id": "1.4",
+      "title": "When to Pass by Pointer vs Value",
+      "code_file": "code/01-foundation/recipe_0_4.zig",
+      "topic": "fundamentals",
+      "tags": [
+        "fundamentals",
+        "pointers",
+        "slices"
+      ]
+    },
+    {
+      "id": "1.4",
       "title": "Finding the Largest or Smallest N Items",
       "code_file": "code/02-core/01-data-structures/recipe_1_4.zig",
       "topic": "data-structures",
@@ -295,6 +283,18 @@
         "comptime",
         "data-structures",
         "error-handling"
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "Build Modes and Safety",
+      "code_file": "code/01-foundation/recipe_0_5.zig",
+      "topic": "fundamentals",
+      "tags": [
+        "error-handling",
+        "fundamentals",
+        "pointers",
+        "testing"
       ]
     },
     {
@@ -688,6 +688,125 @@
       ]
     },
     {
+      "id": "3.1",
+      "title": "Rounding numerical values",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_1.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.2",
+      "title": "Performing accurate decimal calculations",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_2.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.3",
+      "title": "Formatting numbers for output",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_3.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.4",
+      "title": "Working with binary, octal, and hexadecimal integers",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_4.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.5",
+      "title": "Packing/unpacking large integers from bytes",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_5.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.6",
+      "title": "Performing complex-valued math",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_6.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.7",
+      "title": "Working with infinity and NaNs",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_7.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.8",
+      "title": "Calculating with fractions",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_8.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.9",
+      "title": "Calculating with large numerical arrays using SIMD",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_9.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.10",
+      "title": "Performing matrix and linear algebra calculations",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_10.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.11",
+      "title": "Picking things at random",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_11.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "3.12",
+      "title": "Basic time conversions",
+      "code_file": "code/02-core/03-numbers-dates-times/recipe_3_12.zig",
+      "topic": "numbers-time",
+      "tags": []
+    },
+    {
+      "id": "4.1",
+      "title": "Manually consuming an iterator",
+      "code_file": "code/02-core/04-iterators-generators/recipe_4_1.zig",
+      "topic": "iterators",
+      "tags": []
+    },
+    {
+      "id": "4.2",
+      "title": "Delegating iteration",
+      "code_file": "code/02-core/04-iterators-generators/recipe_4_2.zig",
+      "topic": "iterators",
+      "tags": []
+    },
+    {
+      "id": "4.3",
+      "title": "Creating new iteration patterns",
+      "code_file": "code/02-core/04-iterators-generators/recipe_4_3.zig",
+      "topic": "iterators",
+      "tags": []
+    },
+    {
+      "id": "4.4",
+      "title": "Implementing the iterator protocol",
+      "code_file": "code/02-core/04-iterators-generators/recipe_4_4.zig",
+      "topic": "iterators",
+      "tags": []
+    },
+    {
+      "id": "4.5",
+      "title": "Iterating in reverse",
+      "code_file": "code/02-core/04-iterators-generators/recipe_4_5.zig",
+      "topic": "iterators",
+      "tags": []
+    },
+    {
       "id": "4.6",
       "title": "Defining Generator Functions with State",
       "code_file": "code/02-core/04-iterators-generators/recipe_4_6.zig",
@@ -1037,6 +1156,27 @@
         "data-structures",
         "error-handling"
       ]
+    },
+    {
+      "id": "5.20",
+      "title": "Using Directory Handles for Testable File Operations",
+      "code_file": "code/02-core/05-files-io/recipe_5_20.zig",
+      "topic": "files-io",
+      "tags": []
+    },
+    {
+      "id": "5.21",
+      "title": "File Position and Buffering Gotchas",
+      "code_file": "code/02-core/05-files-io/recipe_5_21.zig",
+      "topic": "files-io",
+      "tags": []
+    },
+    {
+      "id": "5.22",
+      "title": "Common File I/O Errors and Solutions",
+      "code_file": "code/02-core/05-files-io/recipe_5_22.zig",
+      "topic": "files-io",
+      "tags": []
     },
     {
       "id": "6.1",
@@ -2200,6 +2340,111 @@
         "resource-cleanup",
         "testing"
       ]
+    },
+    {
+      "id": "13.1",
+      "title": "recipe_13_1",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_1.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.2",
+      "title": "recipe_13_2",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_2.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.3",
+      "title": "recipe_13_3",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_3.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.4",
+      "title": "recipe_13_4",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_4.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.5",
+      "title": "recipe_13_5",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_5.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.6",
+      "title": "recipe_13_6",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_6.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.7",
+      "title": "recipe_13_7",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_7.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.8",
+      "title": "recipe_13_8",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_8.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.9",
+      "title": "recipe_13_9",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_9.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.10",
+      "title": "recipe_13_10",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_10.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.11",
+      "title": "recipe_13_11",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_11.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.12",
+      "title": "recipe_13_12",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_12.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.13",
+      "title": "recipe_13_13",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_13.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.14",
+      "title": "recipe_13_14",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_14.zig",
+      "topic": "utility-scripting",
+      "tags": []
+    },
+    {
+      "id": "13.15",
+      "title": "recipe_13_15",
+      "code_file": "code/04-specialized/13-utility-scripting/recipe_13_15.zig",
+      "topic": "utility-scripting",
+      "tags": []
     },
     {
       "id": "14.1",
