@@ -23,7 +23,7 @@ The redesign treats I/O implementation like memory allocation - as a **runtime p
 ### Key Innovation
 
 ```zig
-pub fn processData(io: *std.Io, allocator: Allocator, data: []const u8) !void {
+pub fn processData(io: std.Io, allocator: Allocator, data: []const u8) !void {
     // Just like we pass allocator, we pass io
     var future = io.async(helper, .{io, data});
     try future.await(io);
@@ -49,8 +49,8 @@ fn bar() !void { ... }         // Sync function
 
 **After (new async)**:
 ```zig
-fn foo(io: *Io) !void { ... }
-fn bar(io: *Io) !void { ... }
+fn foo(io: Io) !void { ... }
+fn bar(io: Io) !void { ... }
 // Both can use async or not - same "color"
 ```
 
@@ -129,11 +129,11 @@ pub const Io = struct {
         // ... other methods
     };
 
-    pub fn async(self: *Io, func: anytype, args: anytype) Future {
+    pub fn async(self: Io, func: anytype, args: anytype) Future {
         return self.vtable.async_fn(self.ptr, func, args);
     }
 
-    pub fn concurrent(self: *Io, func: anytype, args: anytype) !Future {
+    pub fn concurrent(self: Io, func: anytype, args: anytype) !Future {
         return self.vtable.concurrent_fn(self.ptr, func, args);
     }
 };
@@ -149,15 +149,15 @@ Benefits:
 ```zig
 pub const Future = struct {
     handle: *anyopaque,
-    io: *Io,
+    io: Io,
 
     /// Wait for completion (idempotent)
-    pub fn await(self: *Future, io: *Io) !T {
+    pub fn await(self: *Future, io: Io) !T {
         return io.vtable.await_fn(self.handle);
     }
 
     /// Cancel and retrieve result (idempotent)
-    pub fn cancel(self: *Future, io: *Io) !T {
+    pub fn cancel(self: *Future, io: Io) !T {
         return io.vtable.cancel_fn(self.handle);
     }
 };

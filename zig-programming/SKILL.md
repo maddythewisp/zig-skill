@@ -1,171 +1,330 @@
 ---
 name: zig-programming
 description: >
-  Provides comprehensive Zig 0.16.0 programming language expertise including syntax, standard library,
-  build system, memory management, error handling, async I/O, and C interoperability. Use this skill when
-  working with Zig code, learning Zig concepts, debugging compilation errors, or building Zig applications.
+  Zig 0.16.0 programming expertise with correct API patterns, 303 tested recipes,
+  and standard library reference. Includes critical 0.16 API cheatsheet, async I/O
+  patterns, and recipe lookup by topic and API name.
 ---
 
-# Zig Programming Language Skill
+# Zig 0.16.0 Programming Skill
 
-This skill provides expertise in Zig 0.16.0, a general-purpose programming language focused on robustness, optimality, and maintainability. Includes reference documentation, async I/O patterns, 223 tested recipes, code templates, and examples.
+## Zig 0.16 API Cheatsheet
 
-## Table of Contents
+**This is the most critical section.** Zig 0.16 reorganized the stdlib. All I/O goes through `std.Io`.
 
-- [Bundled Resources](#bundled-resources)
-  - [References](#references) - Documentation organized by topic
-  - [Recipes](#recipes) - 223 tested recipes organized by topic
-  - [Templates](#templates) - Starting points for common tasks
-  - [Examples](#examples) - Practical code samples
-- [Workflows](#workflows)
-- [Best Practices](#best-practices)
+### I/O Parameter Convention
 
-## Bundled Resources
+All I/O functions take `io: std.Io` as a **value** (NOT a pointer):
+```zig
+pub fn readFile(io: std.Io, path: []const u8) ![]u8 { ... }
+// In tests: const io: std.Io = std.testing.io;
+```
 
-### References
+### File Operations
 
-Load documentation progressively based on task complexity:
+```zig
+// Open / Create / Delete
+const file = try std.Io.Dir.openFile(.cwd(), io, path, .{});
+const file = try std.Io.Dir.createFile(.cwd(), io, path, .{});
+try std.Io.Dir.deleteFile(.cwd(), io, path);
+defer file.close(io);
 
-**New to Zig?** Start with fundamentals in order:
-1. `references/core-language.md` - Basic syntax, types, operators
-2. `references/control-flow.md` - If, while, for, switch
-3. `references/functions-errors.md` - Functions and error handling
-4. `references/quick-reference.md` - Syntax quick lookup
+// Read entire file
+const data = try std.Io.Dir.readFileAlloc(.cwd(), io, path, allocator, .unlimited);
 
-**Solving specific problems?** Jump directly to:
-- **Error handling** - `references/functions-errors.md` + `references/patterns-error-testing.md`
-- **Memory/allocators** - `references/memory-management.md` + `references/patterns-memory-comptime.md`
-- **Data structures** - `references/arrays-slices.md`, `references/structs-methods.md`, `references/enums-unions.md`, `references/pointers-references.md`
-- **Struct/array/enum patterns** - `references/patterns-data-structures.md`
-- **Stdlib lookup** - grep `references/stdlib-builtins.md` (large file)
-- **C interop** - `references/c-interop.md` + `references/patterns-integration.md`
-- **Build system** - `references/build-system.md` + `references/patterns-integration.md`
-- **Async I/O** - `references/async-overview.md` + `references/async-vs-concurrent.md`
+// Buffered write (MUST flush)
+var wbuf: [4096]u8 = undefined;
+var writer = file.writer(io, &wbuf);
+try writer.interface.writeAll(content);
+try writer.flush();
 
-**Advanced topics:**
-- `references/comptime.md` - Compile-time execution and generics
-- `references/patterns-memory-comptime.md` - Advanced memory and comptime patterns
-- `references/testing-quality.md` - Testing framework and best practices
-- `references/async-overview.md` - Async I/O design philosophy and `std.Io` interface
-- `references/async-vs-concurrent.md` - Critical async vs concurrent distinction
+// Unbuffered write
+try file.writeStreamingAll(io, data);
 
-### Recipes
+// Read (scatter list - note the &.{&buf} pattern)
+const n = try file.readStreaming(io, &.{&buffer});
+// readStreaming returns error.EndOfStream at EOF, not 0
 
-The skill includes **223 tested recipes** from the Zig BBQ Cookbook. All recipes include complete, compilable code verified against Zig 0.16.0.
+// Positional read/write (no seeking needed)
+const n = try file.readPositionalAll(io, &buffer, offset);
+try file.writePositionalAll(io, data, offset);
 
-**Finding recipes by topic:**
-- `recipes/fundamentals.md` - Philosophy, basics (19 recipes)
-- `recipes/data-structures.md` - Arrays, hashmaps, sets (20 recipes)
-- `recipes/strings-text.md` - String processing (14 recipes)
-- `recipes/memory-allocators.md` - Allocator patterns (6 recipes)
-- `recipes/comptime-metaprogramming.md` - Compile-time (24 recipes)
-- `recipes/structs-objects.md` - Structs, unions (22 recipes)
-- `recipes/functions.md` - Function patterns (11 recipes)
-- `recipes/files-io.md` - File operations (19 recipes)
-- `recipes/networking.md` - HTTP, sockets (18 recipes)
-- `recipes/concurrency.md` - Threading, atomics (8 recipes)
-- `recipes/build-system.md` - Build.zig, modules (18 recipes)
-- `recipes/testing-debugging.md` - Testing (14 recipes)
-- `recipes/c-interop.md` - C FFI (7 recipes)
-- `recipes/data-encoding.md` - JSON, CSV, XML (9 recipes)
-- `recipes/iterators.md` - Iterator patterns (8 recipes)
-- `recipes/webassembly.md` - WASM targets (6 recipes)
+// Seek via Writer (File has no seekTo)
+var wb: [1]u8 = undefined;
+var fw = file.writer(io, &wb);
+try fw.seekTo(0);
 
-**Recipe format:** Each recipe includes Problem, Solution, Discussion sections plus full tested code.
+// Stat / Length
+const stat = try file.stat(io);  // returns .size, .permissions, .kind
+const len = try file.length(io);
+try file.setLength(io, new_len);
 
-**When to use recipes vs references:**
-- **Recipes**: "How do I..." questions, practical tasks, working code examples
-- **References**: "What is..." questions, API lookup, comprehensive documentation
+// File struct literal (requires .flags)
+const f = std.Io.File{ .handle = fd, .flags = .{ .nonblocking = false } };
+```
 
-### Templates
+### Directory Operations
 
-Copy and customize these starting points:
-- `assets/templates/basic-program.zig` - Basic program with allocator
-- `assets/templates/build.zig` - Build configuration
-- `assets/templates/test.zig` - Test file structure
-- `assets/templates/cli-application.zig` - CLI app with arg parsing
-- `assets/templates/library-module.zig` - Library/module structure
-- `assets/templates/c-interop-module.zig` - C interop module
-- `assets/templates/async-function.zig` - Async I/O function patterns
+```zig
+try std.Io.Dir.createDir(.cwd(), io, "dir", .default_dir);
+try std.Io.Dir.createDirPath(.cwd(), io, "a/b/c");
+var dir = try std.Io.Dir.openDir(.cwd(), io, path, .{});
+defer dir.close(io);
+try std.Io.Dir.deleteTree(.cwd(), io, path);
+try std.Io.Dir.rename(.cwd(), old, .cwd(), new, io);
+try std.Io.Dir.writeFile(.cwd(), io, .{ .sub_path = path, .data = content });
 
-### Examples
+// With Dir handle (for testable code)
+const file = try dir.createFile(io, "name.txt", .{});
+const file = try dir.openFile(io, "name.txt", .{});
 
-Complete, runnable code demonstrating patterns:
-- `examples/string_manipulation.zig` - String processing
-- `examples/memory_management.zig` - Allocator patterns
-- `examples/error_handling.zig` - Error handling
-- `examples/c_interop.zig` - C FFI
-- `examples/comptime_example.zig` - Compile-time programming
-- `examples/build_example/` - Multi-file project
-- `examples/basic_async.zig` - Async I/O basics with `io.async()`
-- `examples/concurrent_tasks.zig` - Producer-consumer with `io.concurrent()`
-- `examples/cancellation.zig` - Async cancellation and cleanup patterns
+// Iteration (must open with .iterate = true for fresh iteration)
+var idir = try dir.openDir(io, ".", .{ .iterate = true });
+defer idir.close(io);
+var iter = idir.iterate();
+while (try iter.next(io)) |entry| { ... }
+
+// Testing
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+```
+
+### Data Structures (changed in 0.16)
+
+```zig
+// ArrayList - use .empty, pass allocator to methods
+var list = std.ArrayList(T).empty;
+try list.append(allocator, value);
+list.deinit(allocator);
+
+// HashMap - init unchanged
+var map = std.AutoHashMap(K, V).init(allocator);
+defer map.deinit();
+
+// PriorityQueue
+var pq = std.PriorityQueue(T, Ctx, cmpFn).empty;
+try pq.push(allocator, value);
+```
+
+### Networking
+
+```zig
+const net = std.Io.net;
+
+// TCP server
+const addr = net.IpAddress{ .ip4 = net.Ip4Address.loopback(port) };
+var server = try addr.listen(io, .{ .reuse_address = true });
+defer server.deinit(io);
+var client = try server.accept(io);  // returns Stream
+
+// UDP socket
+const addr = net.IpAddress{ .ip4 = net.Ip4Address.unspecified(port) };
+var socket = try addr.bind(io, .{ .mode = .dgram });
+defer socket.close(io);
+
+// TCP client
+var stream = try addr.connect(io, .{});
+defer stream.close(io);
+
+// Socket options (posix.setsockopt still works)
+try std.posix.setsockopt(socket.handle, ...);
+```
+
+### Process, Time, Threading
+
+```zig
+// Spawn process
+var child = try std.process.spawn(io, .{
+    .argv = &.{ "cmd", "arg" },
+    .stdin = .ignore, .stdout = .ignore, .stderr = .ignore,
+});
+_ = try child.wait(io);
+
+// Clock
+const ts = std.Io.Clock.awake.now(io);  // Io.Timestamp with .nanoseconds (i96)
+const wall = std.Io.Clock.real.now(io);
+
+// Sleep
+io.sleep(.fromMilliseconds(100), .awake);
+
+// Threading (WaitGroup removed in 0.16)
+const t = try std.Thread.spawn(.{}, func, .{args});
+t.join();
+
+// Mutex
+var mutex: std.atomic.Mutex = .unlocked;
+mutex.lock();
+defer mutex.unlock();
+```
+
+### Other Changes
+
+```zig
+// Allocator
+var da = std.heap.DebugAllocator(.{}).init;  // replaces GeneralPurposeAllocator
+
+// Custom format
+pub fn format(self: T, writer: *std.Io.Writer) std.Io.Writer.Error!void { ... }
+// Use {f} specifier: std.debug.print("{f}", .{value});
+
+// Permissions (enum, not struct)
+const perms = std.Io.File.Permissions.fromMode(mode);
+// Or use stat.permissions directly
+
+// Random
+var prng = std.Random.DefaultPrng.init(seed);
+const random = prng.random();
+```
+
+### Removed APIs (do NOT use)
+
+These no longer exist in `std.posix` or `std.fs`:
+`posix.socket`, `posix.close`, `posix.dup`, `posix.pipe`, `posix.bind`,
+`posix.listen`, `posix.accept`, `posix.recv`, `posix.send`, `posix.fcntl`,
+`file.seekTo`, `file.read`, `file.getPos`, `file.setEndPos`,
+`fs.cwd()`, `fs.File`, `ArrayList(T).init(alloc)`
+
+For raw syscalls, use `std.os.linux` directly (e.g., `linux.dup`, `linux.pipe2`, `linux.socketpair`).
+
+---
+
+## Async I/O Quick Reference
+
+```zig
+// async: operations CAN proceed out-of-order (default choice)
+var fut_a = io.async(doWork, .{io, data_a});
+var fut_b = io.async(doWork, .{io, data_b});
+try fut_a.await(io);
+try fut_b.await(io);
+
+// concurrent: operations MUST run simultaneously (producer-consumer)
+var fut = io.concurrent(producer, .{io, queue}) catch |err| switch (err) {
+    error.ConcurrencyUnavailable => { /* fallback */ },
+    else => return err,
+};
+defer fut.cancel(io);  // always cancel on scope exit
+```
+
+**Use `io.async()` by default.** Only use `io.concurrent()` when operations MUST run in parallel.
+For deep dive: read `references/async-vs-concurrent.md`.
+
+---
+
+## Recipe Lookup
+
+303 tested recipes in `zig-bbq-cookbook/code/`. Each file is self-contained with tests.
+Run with `zig test <file>`. Read any recipe with `Read zig-bbq-cookbook/code/{path}/recipe_X_Y.zig`.
+
+### By Topic
+
+| Topic | Directory | Count |
+|-------|-----------|-------|
+| Zig Bootcamp | `code/00-bootcamp/` | 14 |
+| Foundation | `code/01-foundation/` | 5 |
+| Data Structures | `code/02-core/01-data-structures/` | 20 |
+| Strings & Text | `code/02-core/02-strings-and-text/` | 14 |
+| Numbers & Time | `code/02-core/03-numbers-dates-times/` | 12 |
+| Iterators | `code/02-core/04-iterators-generators/` | 13 |
+| Files & I/O | `code/02-core/05-files-io/` | 22 |
+| Data Encoding | `code/03-advanced/06-data-encoding/` | 9 |
+| Functions | `code/03-advanced/07-functions/` | 11 |
+| Structs & Objects | `code/03-advanced/08-structs-unions-objects/` | 22 |
+| Metaprogramming | `code/03-advanced/09-metaprogramming/` | 17 |
+| Modules & Build | `code/03-advanced/10-modules-build-system/` | 11 |
+| Networking & HTTP | `code/04-specialized/11-network-web/` | 13 |
+| Concurrency | `code/04-specialized/12-concurrency/` | 8 |
+| Utility Scripting | `code/04-specialized/13-utility-scripting/` | 15 |
+| Testing & Debug | `code/04-specialized/14-testing-debugging/` | 14 |
+| C Interop | `code/04-specialized/15-c-interoperability/` | 7 |
+| Build System | `code/05-zig-paradigms/16-zig-build-system/` | 7 |
+| Advanced Comptime | `code/05-zig-paradigms/17-advanced-comptime/` | 7 |
+| Memory Management | `code/05-zig-paradigms/18-memory-management/` | 6 |
+| WebAssembly | `code/05-zig-paradigms/19-webassembly-freestanding/` | 6 |
+| High-Perf Networking | `code/05-zig-paradigms/20-high-perf-networking/` | 6 |
+
+### By API
+
+For a full API-to-recipe mapping, read `references/api-recipe-index.md`.
+
+Key recipes for common tasks:
+
+| Need | Recipe files |
+|------|-------------|
+| File read/write | `05-files-io/recipe_5_1` |
+| File copy/move | `13-utility-scripting/recipe_13_6` |
+| Temp files | `05-files-io/recipe_5_17` |
+| Dir handles (testable I/O) | `05-files-io/recipe_5_20` |
+| Binary I/O | `06-data-encoding/recipe_6_9` |
+| JSON parse | `06-data-encoding/recipe_6_1`, `recipe_6_2` |
+| HTTP client | `11-network-web/recipe_11_1` |
+| TCP server | `20-high-perf-networking/recipe_20_1` |
+| UDP multicast | `20-high-perf-networking/recipe_20_5` |
+| ArrayList patterns | `00-bootcamp/recipe_0_6` |
+| HashMap patterns | `01-data-structures/recipe_1_7`, `recipe_1_12` |
+| Thread spawn/join | `12-concurrency/recipe_12_10` |
+| Process spawn | `13-utility-scripting/recipe_13_14` |
+| Custom allocator | `18-memory-management/recipe_18_1` |
+| Visitor pattern | `08-structs-unions-objects/recipe_8_20` |
+| Comptime generics | `09-metaprogramming/recipe_9_1` |
+| C FFI | `15-c-interoperability/recipe_15_1` |
+
+---
+
+## Reference Files
+
+Read these on-demand for deeper knowledge:
+
+| Topic | File | When to read |
+|-------|------|-------------|
+| Language basics | `references/core-language.md` | New to Zig |
+| Control flow | `references/control-flow.md` | if/while/for/switch details |
+| Functions & errors | `references/functions-errors.md` | Error handling patterns |
+| Memory | `references/memory-management.md` | Allocator questions |
+| Comptime | `references/comptime.md` | Compile-time programming |
+| Data structures | `references/data-structures.md` | Stdlib containers |
+| Stdlib builtins | `references/stdlib-builtins.md` | Grep this file, don't read whole |
+| Async deep dive | `references/async-vs-concurrent.md` | async vs concurrent distinction |
+| C interop | `references/c-interop.md` | FFI, @cImport, linking |
+| Build system | `references/build-system.md` | build.zig configuration |
+| Testing | `references/testing-quality.md` | Test framework |
+| Version migration | `references/version-differences.md` | Porting from older Zig |
+| API-recipe index | `references/api-recipe-index.md` | Find recipe by API name |
+
+---
+
+## Templates
+
+Copy and customize from `assets/templates/`:
+- `basic-program.zig` — Minimal program with allocator
+- `build.zig` — Build configuration
+- `test.zig` — Test file structure
+- `cli-application.zig` — CLI with arg parsing
+- `library-module.zig` — Library module structure
+- `c-interop-module.zig` — C FFI module
+- `async-function.zig` — Async I/O patterns
+
+---
 
 ## Workflows
 
 ### Writing New Code
-
-1. **Start from template** - Copy appropriate template from `assets/templates/`
-2. **Handle errors explicitly** - Use `try`, `catch`, or `errdefer`
-3. **Pass allocators** - Never use global state, pass allocators as parameters
-4. **Add tests immediately** - Write `test` blocks alongside implementation
-5. **Document public APIs** - Use `///` doc comments for exported functions
-
-### Writing Async I/O Code
-
-Zig 0.16 introduces async I/O via the `std.Io` interface. Key principles:
-
-1. **Accept `io: *std.Io` parameter** - Like allocators, pass explicitly to functions needing async
-2. **Use `io.async()` by default** - Operations can proceed out-of-order; sequential awaiting is valid
-3. **Use `io.concurrent()` sparingly** - Only when operations MUST run simultaneously (producer-consumer)
-4. **Always handle cancellation** - Use `defer future.cancel(io)` for resource cleanup
-5. **Test with blocking I/O first** - Reveals dependency issues before adding concurrency
-
-**Critical distinction: async ≠ concurrent**
-- `io.async()`: operations *can* proceed out-of-order (works with blocking I/O too)
-- `io.concurrent()`: operations *must* run simultaneously (fails if parallelism unavailable)
-
-**Quick pattern:**
-```zig
-fn process(io: *std.Io, data: []const u8) !void {
-    var fut_a = io.async(save, .{io, data, "a.txt"});
-    var fut_b = io.async(save, .{io, data, "b.txt"});
-    try fut_a.await(io);
-    try fut_b.await(io);
-}
-```
-
-**Load references:** `references/async-overview.md` and `references/async-vs-concurrent.md`
-**Load examples:** `examples/basic_async.zig`, `examples/concurrent_tasks.zig`, `examples/cancellation.zig`
+1. Check the API cheatsheet above for correct 0.16 syntax
+2. Find a relevant recipe and read the .zig file
+3. Handle errors explicitly with `try`/`catch`/`errdefer`
+4. Pass `io: std.Io` and allocators as parameters
+5. Write `test` blocks alongside implementation
 
 ### Debugging Compilation Errors
+1. Check "Removed APIs" list — you may be using a 0.15 pattern
+2. Common 0.16 issues: missing `io` parameter, wrong `readStreaming` scatter list type,
+   `ArrayList(T){}` instead of `.empty`, `File.read()` instead of `readStreaming`
+3. Use `std.debug.print()` for inspection, `zig test` to isolate
 
-**Zig-specific gotchas:**
-- **Comptime type resolution** - Use `@TypeOf()` inspection or add explicit casts
-- **Allocator lifetime issues** - Verify `defer` cleanup order and `errdefer` on error paths
-- **Optional unwrapping** - Use `.?` only when certain; prefer `orelse` or `if` unwrap for safety
-
-**Debug tools:** `std.debug.print()` for inspection, `-Doptimize=Debug` for stack traces, `zig test` to isolate issues
-
-### Explaining Concepts
-
-To teach Zig concepts effectively:
-1. **Load relevant reference** - Start with the appropriate reference file for the topic
-2. **Show runnable code** - Use complete examples from `examples/` directory
-3. **Highlight uniqueness** - Emphasize Zig's distinguishing features (explicit allocators, comptime, no hidden control flow)
-4. **Reference stdlib** - Point to specific standard library functions when applicable
-
-## Best Practices
-
-Core Zig idioms:
-
-1. **Explicit error handling** - Use `try`, `catch`, or error unions; never ignore errors
-2. **Defer cleanup** - Use `defer` for cleanup, `errdefer` for error-path cleanup
-3. **Pass allocators** - Never use global state; pass allocators explicitly as parameters
-4. **Leverage comptime** - Use compile-time execution for generic programming
-5. **Write tests inline** - Use `test "description" {}` blocks alongside implementation
-6. **Document public APIs** - Add `///` doc comments for exported functions
-7. **Handle optionals explicitly** - Use `orelse`, `.?`, or `if` unwrapping
-8. **No hidden control flow** - Zig has no hidden allocations or exceptions
-9. **Pass Io explicitly** - Like allocators, pass `io: *std.Io` as a parameter for async-capable functions
-10. **Default to `io.async()` over `io.concurrent()`** - Only use concurrent when simultaneous execution is required
+### Best Practices
+1. **Explicit error handling** — Use `try`, `catch`, or error unions
+2. **Defer cleanup** — `defer file.close(io)`, `errdefer` for error paths
+3. **Pass allocators and io** — Never use global state
+4. **Leverage comptime** — Use compile-time execution for generics
+5. **Write tests inline** — `test "description" {}` blocks
+6. **Pass `io: std.Io` (value, not pointer)** to I/O functions
+7. **Default to `io.async()` over `io.concurrent()`**

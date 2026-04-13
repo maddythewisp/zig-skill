@@ -16,7 +16,7 @@ Async allows you to express that operations are **independent** and *could* proc
 ### Example: Async File Saves
 
 ```zig
-fn saveFiles(io: *Io, data: []const u8) !void {
+fn saveFiles(io: Io, data: []const u8) !void {
     var fut_a = io.async(saveFile, .{io, data, "a.txt"});
     var fut_b = io.async(saveFile, .{io, data, "b.txt"});
 
@@ -65,7 +65,7 @@ Concurrent operations *must* run at the same time because they **depend on each 
 ### Example: Producer-Consumer
 
 ```zig
-fn producerConsumer(io: *Io) !void {
+fn producerConsumer(io: Io) !void {
     var queue = io.Queue(Task).init();
 
     // These MUST run concurrently or we deadlock!
@@ -76,13 +76,13 @@ fn producerConsumer(io: *Io) !void {
     try consumer.await(io);
 }
 
-fn produce(io: *Io, queue: *Io.Queue(Task)) !void {
+fn produce(io: Io, queue: *Io.Queue(Task)) !void {
     for (tasks) |task| {
         try queue.putOne(task); // Blocks until consumer takes item
     }
 }
 
-fn consume(io: *Io, queue: *Io.Queue(Task)) !void {
+fn consume(io: Io, queue: *Io.Queue(Task)) !void {
     while (queue.getOne()) |task| { // Blocks until producer puts item
         try processTask(task);
     }
@@ -250,7 +250,7 @@ test "concurrent operations run in parallel" {
 ### Example 1: HTTP Server (Async)
 
 ```zig
-fn handleRequest(io: *Io, request: Request) !Response {
+fn handleRequest(io: Io, request: Request) !Response {
     // These can run in any order
     var auth = io.async(checkAuth, .{io, request.headers});
     var data = io.async(fetchData, .{io, request.params});
@@ -268,7 +268,7 @@ Independent operations - `async()` is correct.
 ### Example 2: WebSocket (Concurrent)
 
 ```zig
-fn handleWebSocket(io: *Io, conn: Connection) !void {
+fn handleWebSocket(io: Io, conn: Connection) !void {
     var inbox = io.Queue(Message).init();
     var outbox = io.Queue(Message).init();
 
@@ -288,7 +288,7 @@ Bidirectional communication - `concurrent()` is required.
 ### Example 3: Data Pipeline (Async)
 
 ```zig
-fn processPipeline(io: *Io, input: []const u8) ![]u8 {
+fn processPipeline(io: Io, input: []const u8) ![]u8 {
     // Each stage can start when data available
     var stage1 = io.async(decode, .{io, input});
     var stage2 = io.async(validate, .{io, &stage1});

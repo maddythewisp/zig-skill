@@ -4,7 +4,7 @@ const std = @import("std");
 // Zig 0.16.0+ required
 
 /// Long-running operation that can be cancelled
-fn longOperation(io: *std.Io, duration_ms: u64) ![]const u8 {
+fn longOperation(io: std.Io, duration_ms: u64) ![]const u8 {
     _ = io;
     std.debug.print("[Operation] Starting (duration: {d}ms)\n", .{duration_ms});
 
@@ -15,7 +15,7 @@ fn longOperation(io: *std.Io, duration_ms: u64) ![]const u8 {
 }
 
 /// Example 1: Basic cancellation with defer
-fn basicCancellation(io: *std.Io) !void {
+fn basicCancellation(io: std.Io) !void {
     std.debug.print("\n=== Basic Cancellation ===\n", .{});
 
     var future = io.async(longOperation, .{ io, 100 });
@@ -46,14 +46,14 @@ const Resource = struct {
     }
 };
 
-fn allocateResource(io: *std.Io, allocator: std.mem.Allocator, size: usize) !Resource {
+fn allocateResource(io: std.Io, allocator: std.mem.Allocator, size: usize) !Resource {
     _ = io;
     std.debug.print("[Allocate] Creating resource of {d} bytes\n", .{size});
     std.time.sleep(50 * std.time.ns_per_ms);
     return try Resource.init(allocator, size);
 }
 
-fn cancellationWithCleanup(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn cancellationWithCleanup(io: std.Io, allocator: std.mem.Allocator) !void {
     std.debug.print("\n=== Cancellation with Cleanup ===\n", .{});
 
     var future = io.async(allocateResource, .{ io, allocator, 1024 });
@@ -72,7 +72,7 @@ fn cancellationWithCleanup(io: *std.Io, allocator: std.mem.Allocator) !void {
 }
 
 /// Example 3: Timeout pattern using cancellation
-fn timeoutPattern(io: *std.Io) !void {
+fn timeoutPattern(io: std.Io) !void {
     std.debug.print("\n=== Timeout Pattern ===\n", .{});
 
     // Start long operation
@@ -96,7 +96,7 @@ fn timeoutPattern(io: *std.Io) !void {
 }
 
 /// Example 4: Cancelling multiple operations
-fn cancelMultiple(io: *std.Io) !void {
+fn cancelMultiple(io: std.Io) !void {
     std.debug.print("\n=== Cancel Multiple Operations ===\n", .{});
 
     // Start multiple operations
@@ -122,7 +122,7 @@ fn cancelMultiple(io: *std.Io) !void {
 }
 
 /// Example 5: Idempotent cancellation
-fn idempotentCancellation(io: *std.Io) !void {
+fn idempotentCancellation(io: std.Io) !void {
     std.debug.print("\n=== Idempotent Cancellation ===\n", .{});
 
     var future = io.async(longOperation, .{ io, 100 });
@@ -142,7 +142,7 @@ fn idempotentCancellation(io: *std.Io) !void {
 }
 
 /// Example 6: Conditional cancellation
-fn conditionalCancellation(io: *std.Io, should_cancel: bool) !void {
+fn conditionalCancellation(io: std.Io, should_cancel: bool) !void {
     std.debug.print("\n=== Conditional Cancellation (cancel={}) ===\n", .{should_cancel});
 
     var future = io.async(longOperation, .{ io, 100 });
@@ -159,7 +159,7 @@ fn conditionalCancellation(io: *std.Io, should_cancel: bool) !void {
 }
 
 /// Example 7: Cancellation in error paths
-fn operationThatFails(io: *std.Io, should_fail: bool) ![]const u8 {
+fn operationThatFails(io: std.Io, should_fail: bool) ![]const u8 {
     _ = io;
     std.time.sleep(50 * std.time.ns_per_ms);
 
@@ -170,7 +170,7 @@ fn operationThatFails(io: *std.Io, should_fail: bool) ![]const u8 {
     return "Success";
 }
 
-fn errorPathCancellation(io: *std.Io) !void {
+fn errorPathCancellation(io: std.Io) !void {
     std.debug.print("\n=== Error Path Cancellation ===\n", .{});
 
     // Test with failure
@@ -205,7 +205,7 @@ const Server = struct {
         return .{ .running = std.atomic.Value(bool).init(true) };
     }
 
-    fn run(self: *Server, io: *std.Io) !void {
+    fn run(self: *Server, io: std.Io) !void {
         _ = io;
         std.debug.print("[Server] Starting\n", .{});
 
@@ -223,7 +223,7 @@ const Server = struct {
     }
 };
 
-fn gracefulShutdown(io: *std.Io) !void {
+fn gracefulShutdown(io: std.Io) !void {
     std.debug.print("\n=== Graceful Shutdown ===\n", .{});
 
     var server = Server.init();

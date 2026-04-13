@@ -93,12 +93,9 @@ def format_recipe_summary(recipe: dict) -> str:
     lines = [
         f"Recipe {recipe['id']}: {recipe['title']}",
         f"  Topic: {recipe['topic']}",
-        f"  Difficulty: {recipe['difficulty']}",
         f"  Tags: {', '.join(recipe.get('tags', [])) or 'none'}",
         f"  Code: {recipe.get('code_file', 'N/A')}",
     ]
-    if recipe.get("see_also"):
-        lines.append(f"  See Also: {', '.join(recipe['see_also'][:3])}")
     return "\n".join(lines)
 
 

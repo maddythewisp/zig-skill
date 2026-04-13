@@ -6,7 +6,7 @@ const std = @import("std");
 
 /// Template for a simple async function
 /// Replace T with your return type
-fn asyncFunction(io: *std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
+fn asyncFunction(io: std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
     // TODO: Implement your async logic here
 
     // Example: Spawn async work
@@ -22,7 +22,7 @@ fn asyncFunction(io: *std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
 }
 
 /// Template for a helper function (can be called async)
-fn helperFunction(io: *std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
+fn helperFunction(io: std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
     _ = io; // Remove if using io
 
     // TODO: Implement helper logic
@@ -37,7 +37,7 @@ fn helperFunction(io: *std.Io, allocator: std.mem.Allocator, arg: anytype) !T {
 }
 
 /// Template for async function with multiple parallel operations
-fn parallelAsyncFunction(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn parallelAsyncFunction(io: std.Io, allocator: std.mem.Allocator) !void {
     // Spawn multiple async operations
     var future1 = io.async(operation1, .{ io, allocator });
     var future2 = io.async(operation2, .{ io, allocator });
@@ -62,7 +62,7 @@ fn parallelAsyncFunction(io: *std.Io, allocator: std.mem.Allocator) !void {
 }
 
 /// Template for concurrent function (requires parallelism)
-fn concurrentFunction(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn concurrentFunction(io: std.Io, allocator: std.mem.Allocator) !void {
     var queue = io.Queue(Task).init();
 
     // Spawn concurrent operations (MUST run simultaneously)
@@ -79,7 +79,7 @@ fn concurrentFunction(io: *std.Io, allocator: std.mem.Allocator) !void {
 }
 
 /// Template for producer function
-fn producer(io: *std.Io, queue: *std.Io.Queue(Task)) !void {
+fn producer(io: std.Io, queue: *std.Io.Queue(Task)) !void {
     // TODO: Implement producer logic
 
     for (tasks) |task| {
@@ -88,7 +88,7 @@ fn producer(io: *std.Io, queue: *std.Io.Queue(Task)) !void {
 }
 
 /// Template for consumer function
-fn consumer(io: *std.Io, queue: *std.Io.Queue(Task)) !void {
+fn consumer(io: std.Io, queue: *std.Io.Queue(Task)) !void {
     // TODO: Implement consumer logic
 
     while (queue.getOne()) |task| {
@@ -97,7 +97,7 @@ fn consumer(io: *std.Io, queue: *std.Io.Queue(Task)) !void {
 }
 
 /// Template for async function with timeout
-fn asyncWithTimeout(io: *std.Io, timeout_ms: u64) !T {
+fn asyncWithTimeout(io: std.Io, timeout_ms: u64) !T {
     var work = io.async(longOperation, .{io});
     defer _ = work.cancel(io) catch {};
 
@@ -116,7 +116,7 @@ fn asyncWithTimeout(io: *std.Io, timeout_ms: u64) !T {
 }
 
 /// Template for async function with error handling
-fn asyncWithErrorHandling(io: *std.Io, allocator: std.mem.Allocator, input: Input) !Output {
+fn asyncWithErrorHandling(io: std.Io, allocator: std.mem.Allocator, input: Input) !Output {
     var future = io.async(process, .{ io, allocator, input });
     defer _ = future.cancel(io) catch {};
 
@@ -140,12 +140,12 @@ fn asyncWithErrorHandling(io: *std.Io, allocator: std.mem.Allocator, input: Inpu
 
 /// Template for async function that returns a Future
 /// (Useful for composable async operations)
-fn createFuture(io: *std.Io, allocator: std.mem.Allocator, input: Input) std.Io.Future {
+fn createFuture(io: std.Io, allocator: std.mem.Allocator, input: Input) std.Io.Future {
     return io.async(process, .{ io, allocator, input });
 }
 
 /// Template for chaining async operations
-fn chainedAsync(io: *std.Io, allocator: std.mem.Allocator, input: Input) !Output {
+fn chainedAsync(io: std.Io, allocator: std.mem.Allocator, input: Input) !Output {
     // Step 1: Fetch data
     var fetch_future = io.async(fetchData, .{ io, input });
     const data = try fetch_future.await(io);
@@ -164,7 +164,7 @@ fn chainedAsync(io: *std.Io, allocator: std.mem.Allocator, input: Input) !Output
 }
 
 /// Template for async function with resource cleanup
-fn asyncWithResource(io: *std.Io, allocator: std.mem.Allocator) !Result {
+fn asyncWithResource(io: std.Io, allocator: std.mem.Allocator) !Result {
     // Acquire resource
     var resource_future = io.async(acquireResource, .{ io, allocator });
     defer if (resource_future.cancel(io)) |resource| {
@@ -184,7 +184,7 @@ fn asyncWithResource(io: *std.Io, allocator: std.mem.Allocator) !Result {
 }
 
 /// Template for graceful shutdown
-fn runWithShutdown(io: *std.Io, allocator: std.mem.Allocator, shutdown_signal: *std.atomic.Value(bool)) !void {
+fn runWithShutdown(io: std.Io, allocator: std.mem.Allocator, shutdown_signal: *std.atomic.Value(bool)) !void {
     var server = Server.init(allocator);
     defer server.deinit();
 
@@ -277,45 +277,45 @@ const Output = struct {}; // Replace with your output type
 const Result = struct {}; // Replace with your result type
 const Task = struct {}; // Replace with your task type
 
-fn operation1(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn operation1(io: std.Io, allocator: std.mem.Allocator) !void {
     _ = io;
     _ = allocator;
 }
 
-fn operation2(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn operation2(io: std.Io, allocator: std.mem.Allocator) !void {
     _ = io;
     _ = allocator;
 }
 
-fn operation3(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn operation3(io: std.Io, allocator: std.mem.Allocator) !void {
     _ = io;
     _ = allocator;
 }
 
-fn longOperation(io: *std.Io) !T {
+fn longOperation(io: std.Io) !T {
     _ = io;
 }
 
-fn process(io: *std.Io, allocator: std.mem.Allocator, input: Input) !Output {
+fn process(io: std.Io, allocator: std.mem.Allocator, input: Input) !Output {
     _ = io;
     _ = allocator;
     _ = input;
 }
 
-fn fetchData(io: *std.Io, input: Input) ![]const u8 {
+fn fetchData(io: std.Io, input: Input) ![]const u8 {
     _ = io;
     _ = input;
     return "";
 }
 
-fn processData(io: *std.Io, allocator: std.mem.Allocator, data: []const u8) ![]const u8 {
+fn processData(io: std.Io, allocator: std.mem.Allocator, data: []const u8) ![]const u8 {
     _ = io;
     _ = allocator;
     _ = data;
     return "";
 }
 
-fn saveData(io: *std.Io, allocator: std.mem.Allocator, data: []const u8) !void {
+fn saveData(io: std.Io, allocator: std.mem.Allocator, data: []const u8) !void {
     _ = io;
     _ = allocator;
     _ = data;
@@ -341,13 +341,13 @@ const Resource = struct {
     }
 };
 
-fn acquireResource(io: *std.Io, allocator: std.mem.Allocator) !Resource {
+fn acquireResource(io: std.Io, allocator: std.mem.Allocator) !Resource {
     _ = io;
     _ = allocator;
     return Resource{};
 }
 
-fn useResource(io: *std.Io, resource: *Resource) !Result {
+fn useResource(io: std.Io, resource: *Resource) !Result {
     _ = io;
     _ = resource;
     return Result{};
@@ -363,7 +363,7 @@ const Server = struct {
         _ = self;
     }
 
-    fn run(self: *Server, io: *std.Io) !void {
+    fn run(self: *Server, io: std.Io) !void {
         _ = self;
         _ = io;
     }

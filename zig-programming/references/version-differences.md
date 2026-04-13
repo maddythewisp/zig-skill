@@ -52,12 +52,16 @@ This document provides comprehensive guidance for migrating between Zig versions
 - `Io.Queue` for message-passing synchronization
 
 **Breaking Changes from 0.15:**
-- New `std.Io` parameter convention for async-capable functions
-- Functions accepting I/O should take `io: *std.Io` parameter (like allocators)
-- Some standard library APIs updated to accept `*std.Io`
+- New `std.Io` parameter convention — functions take `io: std.Io` (value type, NOT pointer)
+- **Major stdlib reorganization:** `std.fs` → `std.Io.Dir`, file operations require `io` parameter
+- `File.read()`, `File.seekTo()`, `File.getPos()` removed — use `readStreaming`/`readPositionalAll`/`Writer.seekTo`
+- `posix.socket`, `posix.close`, `posix.dup`, `posix.pipe` removed — use `std.Io.net` or `std.os.linux`
+- `ArrayList(T).init(alloc)` → `ArrayList(T).empty`, allocator passed to methods
+- `GeneralPurposeAllocator` → `DebugAllocator`
 
 **Code Compatibility:**
-- ✅ Synchronous code from 0.15.x works without changes
+- ❌ Any code using `std.fs.cwd()`, `File.read/seekTo`, or `posix.socket/close` must be rewritten
+- ✅ Pure computation code (no I/O) works without changes
 - ⚠️ Code wanting async must adopt new `std.Io` patterns
 - ❌ Old async/await code (0.10.x) cannot be directly ported — use new `io.async()` API
 
@@ -820,7 +824,7 @@ const exe = b.addExecutable(.{
 
 ### 0.15.x → 0.16.x Migration
 
-The major change in 0.16 is the **reintroduction of async I/O** through the new `std.Io` interface. Synchronous code from 0.15 continues to work unchanged.
+The major change in 0.16 is the **reintroduction of async I/O** through the new `std.Io` interface, along with a **major stdlib reorganization** that moves file/directory/networking operations to `std.Io.Dir`, `std.Io.File`, and `std.Io.net`. Pure computation code works unchanged, but any code using `std.fs`, file I/O, or POSIX networking must be rewritten.
 
 #### 1. New Async I/O System
 
@@ -830,7 +834,7 @@ The major change in 0.16 is the **reintroduction of async I/O** through the new 
 const std = @import("std");
 
 // Functions that do async work accept an Io parameter (like allocators)
-fn processFiles(io: *std.Io, data: []const u8) !void {
+fn processFiles(io: std.Io, data: []const u8) !void {
     // Spawn async operations
     var fut_a = io.async(saveFile, .{io, data, "a.txt"});
     var fut_b = io.async(saveFile, .{io, data, "b.txt"});
@@ -840,7 +844,7 @@ fn processFiles(io: *std.Io, data: []const u8) !void {
     try fut_b.await(io);
 }
 
-fn saveFile(io: *std.Io, data: []const u8, path: []const u8) !void {
+fn saveFile(io: std.Io, data: []const u8, path: []const u8) !void {
     // I/O operations use the io parameter
     _ = .{ io, data, path };
 }
@@ -881,8 +885,8 @@ try future.await(io);
 #### Migration Recommendations 0.15 → 0.16
 
 **Quick Check:**
-1. Existing synchronous code works without changes
-2. To add async capability, pass `io: *std.Io` to functions needing async
+1. Pure computation code (no I/O) works without changes; any file/network I/O code must migrate to `std.Io.Dir`/`std.Io.File`
+2. To add async capability, pass `io: std.Io` to functions needing async
 3. Replace thread-based concurrency with `io.async()` / `io.concurrent()` where appropriate
 4. Use `defer future.cancel(io)` for cleanup
 5. Test with blocking I/O first, then upgrade to ThreadPool
@@ -914,9 +918,9 @@ try future.await(io);
 | Future handling | N/A | `future.await(io)` | Idempotent |
 | Cancellation | N/A | `future.cancel(io)` | Idempotent |
 | Message passing | Manual | `Io.Queue(T)` | Built-in primitive |
-| I/O interface | Direct syscalls | `*std.Io` parameter | Like allocator pattern |
+| I/O interface | Direct syscalls | `std.Io` parameter | Like allocator pattern |
 
-**Migration from 0.15:** Synchronous code works unchanged. Add `io: *std.Io` parameter to functions needing async.
+**Migration from 0.15:** Pure computation works unchanged. All I/O code must migrate: `std.fs` → `std.Io.Dir`, add `io: std.Io` parameter to I/O functions.
 
 ### Build System API (0.10 → 0.11)
 

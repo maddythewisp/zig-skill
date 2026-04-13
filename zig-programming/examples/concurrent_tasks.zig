@@ -4,7 +4,7 @@ const std = @import("std");
 // Zig 0.16.0+ required
 
 /// Producer function - generates items and puts them in queue
-fn producer(io: *std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
+fn producer(io: std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
     std.debug.print("[Producer] Starting, will produce {d} items\n", .{count});
 
     for (0..count) |i| {
@@ -21,7 +21,7 @@ fn producer(io: *std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
 }
 
 /// Consumer function - takes items from queue and processes them
-fn consumer(io: *std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
+fn consumer(io: std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
     std.debug.print("[Consumer] Starting, will consume {d} items\n", .{count});
 
     var consumed: usize = 0;
@@ -39,7 +39,7 @@ fn consumer(io: *std.Io, queue: *std.Io.Queue(i32), count: usize) !void {
 }
 
 /// Example 1: Basic producer-consumer pattern
-fn producerConsumerExample(io: *std.Io) !void {
+fn producerConsumerExample(io: std.Io) !void {
     std.debug.print("\n=== Producer-Consumer Example ===\n", .{});
 
     var queue = io.Queue(i32).init();
@@ -57,7 +57,7 @@ fn producerConsumerExample(io: *std.Io) !void {
 }
 
 /// Example 2: Multiple producers and consumers
-fn multiProducer(io: *std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) !void {
+fn multiProducer(io: std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) !void {
     std.debug.print("[Producer {d}] Starting\n", .{id});
 
     for (0..count) |i| {
@@ -70,7 +70,7 @@ fn multiProducer(io: *std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) 
     std.debug.print("[Producer {d}] Finished\n", .{id});
 }
 
-fn multiConsumer(io: *std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) !void {
+fn multiConsumer(io: std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) !void {
     std.debug.print("[Consumer {d}] Starting\n", .{id});
 
     var consumed: usize = 0;
@@ -84,7 +84,7 @@ fn multiConsumer(io: *std.Io, queue: *std.Io.Queue(i32), id: u32, count: usize) 
     std.debug.print("[Consumer {d}] Finished\n", .{id});
 }
 
-fn multiProducerConsumer(io: *std.Io) !void {
+fn multiProducerConsumer(io: std.Io) !void {
     std.debug.print("\n=== Multiple Producers/Consumers ===\n", .{});
 
     var queue = io.Queue(i32).init();
@@ -111,7 +111,7 @@ const Task = struct {
     data: []const u8,
 };
 
-fn taskProducer(io: *std.Io, queue: *std.Io.Queue(Task), tasks: []const Task) !void {
+fn taskProducer(io: std.Io, queue: *std.Io.Queue(Task), tasks: []const Task) !void {
     std.debug.print("[Task Producer] Submitting {d} tasks\n", .{tasks.len});
 
     for (tasks) |task| {
@@ -122,7 +122,7 @@ fn taskProducer(io: *std.Io, queue: *std.Io.Queue(Task), tasks: []const Task) !v
     std.debug.print("[Task Producer] Finished\n", .{});
 }
 
-fn worker(io: *std.Io, queue: *std.Io.Queue(Task), id: u32, task_count: usize) !void {
+fn worker(io: std.Io, queue: *std.Io.Queue(Task), id: u32, task_count: usize) !void {
     std.debug.print("[Worker {d}] Starting\n", .{id});
 
     var processed: usize = 0;
@@ -139,7 +139,7 @@ fn worker(io: *std.Io, queue: *std.Io.Queue(Task), id: u32, task_count: usize) !
     std.debug.print("[Worker {d}] Finished\n", .{id});
 }
 
-fn workerPoolExample(io: *std.Io, allocator: std.mem.Allocator) !void {
+fn workerPoolExample(io: std.Io, allocator: std.mem.Allocator) !void {
     std.debug.print("\n=== Worker Pool Example ===\n", .{});
 
     var queue = io.Queue(Task).init();
@@ -176,7 +176,7 @@ fn workerPoolExample(io: *std.Io, allocator: std.mem.Allocator) !void {
 }
 
 /// Example 4: Handling ConcurrencyUnavailable error
-fn tryWithFallback(io: *std.Io) !void {
+fn tryWithFallback(io: std.Io) !void {
     std.debug.print("\n=== Concurrent with Fallback ===\n", .{});
 
     var queue = io.Queue(i32).init();
@@ -210,7 +210,7 @@ const Message = struct {
     content: []const u8,
 };
 
-fn sender(io: *std.Io, outbox: *std.Io.Queue(Message), inbox: *std.Io.Queue(Message)) !void {
+fn sender(io: std.Io, outbox: *std.Io.Queue(Message), inbox: *std.Io.Queue(Message)) !void {
     std.debug.print("[Sender] Starting\n", .{});
 
     // Send messages
@@ -230,7 +230,7 @@ fn sender(io: *std.Io, outbox: *std.Io.Queue(Message), inbox: *std.Io.Queue(Mess
     std.debug.print("[Sender] Finished\n", .{});
 }
 
-fn receiver(io: *std.Io, inbox: *std.Io.Queue(Message), outbox: *std.Io.Queue(Message)) !void {
+fn receiver(io: std.Io, inbox: *std.Io.Queue(Message), outbox: *std.Io.Queue(Message)) !void {
     std.debug.print("[Receiver] Starting\n", .{});
 
     for (0..3) |_| {
@@ -250,7 +250,7 @@ fn receiver(io: *std.Io, inbox: *std.Io.Queue(Message), outbox: *std.Io.Queue(Me
     std.debug.print("[Receiver] Finished\n", .{});
 }
 
-fn bidirectionalExample(io: *std.Io) !void {
+fn bidirectionalExample(io: std.Io) !void {
     std.debug.print("\n=== Bidirectional Communication ===\n", .{});
 
     var to_receiver = io.Queue(Message).init();
