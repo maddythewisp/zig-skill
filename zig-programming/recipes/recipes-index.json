@@ -2343,105 +2343,105 @@
     },
     {
       "id": "13.1",
-      "title": "recipe_13_1",
+      "title": "Read from Stdin",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_1.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.2",
-      "title": "recipe_13_2",
+      "title": "Exit Codes",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_2.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.3",
-      "title": "recipe_13_3",
+      "title": "Password Reading",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_3.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.4",
-      "title": "recipe_13_4",
+      "title": "Terminal Size",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_4.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.5",
-      "title": "recipe_13_5",
+      "title": "Execute Command",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_5.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.6",
-      "title": "recipe_13_6",
+      "title": "Copy and Move Files",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_6.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.7",
-      "title": "recipe_13_7",
+      "title": "Archive and Extract",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_7.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.8",
-      "title": "recipe_13_8",
+      "title": "Find Files by Name",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_8.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.9",
-      "title": "recipe_13_9",
+      "title": "Config File Parsing",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_9.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.10",
-      "title": "recipe_13_10",
+      "title": "Logging",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_10.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.11",
-      "title": "recipe_13_11",
+      "title": "Logger Interface",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_11.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.12",
-      "title": "recipe_13_12",
+      "title": "Stopwatch and Timing",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_12.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.13",
-      "title": "recipe_13_13",
+      "title": "Memory Limit Allocator",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_13.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.14",
-      "title": "recipe_13_14",
+      "title": "Open URL in Browser",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_14.zig",
       "topic": "utility-scripting",
       "tags": []
     },
     {
       "id": "13.15",
-      "title": "recipe_13_15",
+      "title": "Argument Parsing",
       "code_file": "code/04-specialized/13-utility-scripting/recipe_13_15.zig",
       "topic": "utility-scripting",
       "tags": []
